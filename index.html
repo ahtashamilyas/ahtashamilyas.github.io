@@ -399,9 +399,10 @@
                     <h3>Auto listening & AI Reviewing.</h3>
                     <p>Gathering jobs and Reviewing by GPT Models @<a href="https://candidateside.com" style="color: white;">Candidate Side</a></p>
                     <div class="code-snippet">
-                        <span class="code-line"><span class="code-keyword">def</span> <span class="code-function">analyze_papers</span>(papers):</span>
-                        <span class="code-line">    results = ml_model.predict(papers)</span>
-                        <span class="code-line">    <span class="code-keyword">return</span> process_results(results)</span>
+                        <span class="code-line"><span class="code-keyword">def</span> <span class="code-function">fetch_Review_jobs</span>(Job_Board):</span>
+                        <span class="code-line">    jobs = auto_listen(Jobs_Board)</span>
+                        <span class="code-line">    review = gpt_model.review(job)</span>
+                        <span class="code-line">    <span class="code-keyword">return</span> process_reviews(reviews)</span>
                     </div>
                     <div class="tech-stack">
                         <span class="skill-tag">Python</span>
