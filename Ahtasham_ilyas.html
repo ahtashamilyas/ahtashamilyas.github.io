@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahtasham Ilyas | Full Stack Developer</title>
+    <link rel="icon" type="image/x-icon" href="./image/Ahtasham.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #ecf0f1;
+            --dark-bg: #1a1a1a;
+            --card-bg: #2d2d2d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Consolas', monospace;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Terminal-inspired header */
+        .terminal-header {
+            background: var(--primary-color);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .terminal-window {
+            background: var(--dark-bg);
+            border-radius: 5px;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .terminal-buttons {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .terminal-button.red { background: #ff5f56; }
+        .terminal-button.yellow { background: #ffbd2e; }
+        .terminal-button.green { background: #27c93f; }
+
+        .terminal-content {
+            font-family: 'Consolas', monospace;
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(44, 62, 80, 0.9);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        nav ul li a:hover {
+            border-color: var(--secondary-color);
+            background: rgba(52, 152, 219, 0.2);
+        }
+
+        /* Main content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 20px;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        h2 i {
+            margin-right: 1rem;
+        }
+
+        /* Project cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Skills visualization */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .skill-bar {
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            border-radius: 10px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* Timeline for experience */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--secondary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border: 4px solid var(--secondary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item.left {
+            left: 0;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+        }
+
+        .timeline-item.left::after {
+            right: -10px;
+        }
+
+        .timeline-item.right::after {
+            left: -10px;
+        }
+
+        /* Code snippet styling */
+        .code-snippet {
+            background: #1e1e1e;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .code-line {
+            display: block;
+            color: #d4d4d4;
+        }
+
+        .code-keyword { color: #569cd6; }
+        .code-string { color: #ce9178; }
+        .code-function { color: #dcdcaa; }
+
+        /* Contact form */
+        .contact-form {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            background: var(--dark-bg);
+            border: 1px solid var(--secondary-color);
+            color: var(--text-color);
+            border-radius: 4px;
+        }
+
+        button {
+            background: var(--secondary-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: var(--accent-color);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item.right {
+                left: 0;
+            }
+
+            .timeline-item.left::after,
+            .timeline-item.right::after {
+                left: 21px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <header class="contact-form">
+        <div class="terminal-window">
+            <div class="terminal-buttons">
+                <div class="terminal-button red"></div>
+                <div class="terminal-button yellow"></div>
+                <div class="terminal-button green"></div>
+            </div>
+            <div class="terminal-content">
+                <span style="color: #27c93f;">➜</span> <span style="color: #3498db;">~/portfolio</span>
+                Hey! I'm <span id="typed-text"></span><span class="cursor">_</span>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
+            <li><a href="#skills"><i class="fas fa-brain"></i> Skills</a></li>
+            <li><a href="#experience"><i class="fas fa-history"></i> Experience</a></li>
+            <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="projects">
+            <h2><i class="fas fa-code-branch"></i> Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Machine Learning Research</h3>
+                    <p>Research project on University's Research Papers</p>
+                    <div class="code-snippet">
+                        <span class="code-line"><span class="code-keyword">def</span> <span class="code-function">analyze_papers</span>(papers):</span>
+                        <span class="code-line">    results = ml_model.predict(papers)</span>
+                        <span class="code-line">    <span class="code-keyword">return</span> process_results(results)</span>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">NLP</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Full Stack Web App</h3>
+                    <p>Responsive web application with RESTful API</p>
+                    <div class="code-snippet">
+                        <span class="code-line"><span class="code-keyword">const</span> api = <span class="code-keyword">async</span> () => {</span>
+                        <span class="code-line">    <span class="code-keyword">const</span> response = <span class="code-keyword">await</span> fetch(<span class="code-string">'/api/data'</span>)</span>
+                        <span class="code-line">    <span class="code-keyword">return</span> response.json()</span>
+                        <span class="code-line">}</span>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">MongoDB</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Auto listening & AI Reviewing.</h3>
+                    <p>Gathering jobs and Reviewing by GPT Models @<a href="https://candidateside.com" style="color: white;">Candidate Side</a></p>
+                    <div class="code-snippet">
+                        <span class="code-line"><span class="code-keyword">def</span> <span class="code-function">analyze_papers</span>(papers):</span>
+                        <span class="code-line">    results = ml_model.predict(papers)</span>
+                        <span class="code-line">    <span class="code-keyword">return</span> process_results(results)</span>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Selenium</span>
+                        <span class="skill-tag">Huggingface</span>
+                        <span class="skill-tag">NLP</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2><i class="fas fa-laptop-code"></i> Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%;" data-skill="HTML/CSS"></div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%;" data-skill="JavaScript"></div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%;" data-skill="React"></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%;" data-skill="Python"></div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%;" data-skill="Node.js"></div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%;" data-skill="PHP"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>CandidateSide Recruiting</h3>
+                        <p>Python & Data Specialist | Jun 2024 – Present</p>
+                        <ul>
+                            <li>99.9% data accuracy rate</li>
+                            <li>Scrapping web data, analyze by GPT Models</li>
+                            <li>Reduced errors by 15%</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Prime Missions (UK)</h3>
+                        <p>Full-Stack Developer | Nov 2023 – Jun 2024</p>
+                        <ul>
+                            <li>Developed responsive interfaces</li>
+                            <li>Built RESTful APIs</li>
+                                <li>Improved data quality by 20%</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>University of Cambridge</h3>
+                        <p>Teaching Assistant | Sep 2021 – Nov 2023</p>
+                        <ul>
+                            <li>Assisted students with programming assignments</li>
+                            <li>Graded assignments and exams</li>
+                            <li>Improved student engagement by 20%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>MUST University</h3>
+                        <p>Bachelor of Science in Computer Science | 2019 – 2023</p>
+                        <ul>
+                            <li>GPA: 3.0/4.0,  Ranked 5th/86th</li>
+                            <li>First Class Honors, Capstone Project</li>
+                            <li>Relevant coursework: Programming, Artificial Intelligence, Data Structure, Algorithms, Databases, Software Engineering etc.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- <section id="education">    <h2><i class="fas fa</section> -->
+        <section id="contact">
+            <h2><i class="fas fa-envelope"></i> Contact Me</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <h3 style="text-align: center;">Have a question or want to work together?</h3>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Your Message"></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+
+
+
+<script>
+    const typed = new Typed('#typed-text', {
+        strings: ['Ahtasham Ilyas','Full Stack Developer', 'Machine Learning Engineer',],
+        typeSpeed: 60,
+        backSpeed: 50,
+        loop: true
+    });
+
+    particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json', function() {
+        console.log('Particles loaded');
+    });
+</script>

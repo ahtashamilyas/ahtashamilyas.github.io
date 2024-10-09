@@ -1,8 +1,0 @@
-right-resume
-v1.2.0
-Update Date: January 21, 2021
-
-License - Apache
-
-License Terms
--------------
