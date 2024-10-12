@@ -219,37 +219,54 @@
         /* Timeline for experience */
         .timeline {
             position: relative;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .timeline::after {
             content: '';
             position: absolute;
-            width: 2px;
+            width: 3px;
             background: var(--secondary-color);
             top: 0;
             bottom: 0;
             left: 50%;
             margin-left: -1px;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
         }
 
         .timeline-item {
-            padding: 10px 40px;
+            padding: 15px 50px;
             position: relative;
             width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+        .timeline-content {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
         .timeline-item::after {
             content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             background: var(--accent-color);
             border: 4px solid var(--secondary-color);
             top: 15px;
             border-radius: 50%;
             z-index: 1;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+            transition: background 0.3s;
         }
 
         .timeline-item.left {
@@ -261,11 +278,53 @@
         }
 
         .timeline-item.left::after {
-            right: -10px;
+            right: -12px;
         }
 
         .timeline-item.right::after {
-            left: -10px;
+            left: -12px;
+        }
+        .timeline-content h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        .timeline-content .role {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .timeline-content .duration {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .timeline-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .timeline-content ul li {
+            margin-bottom: 8px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .skills span {
+            background: rgba(52, 152, 219, 0.2);
+            color: var(--secondary-color);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .skills span:hover {
+            background: rgba(52, 152, 219, 0.4);
         }
 
         /* Code snippet styling */
@@ -349,6 +408,9 @@
             .timeline-item.left::after,
             .timeline-item.right::after {
                 left: 21px;
+            }
+            .timeline-content {
+                padding: 15px;
             }
         }
 
@@ -505,34 +567,105 @@
                 <div class="timeline-item left">
                     <div class="timeline-content">
                         <h3>CandidateSide Recruiting</h3>
-                        <p>Python & Data Specialist | Jun 2024 – Present</p>
+                        <p class="role">Python & Data Specialist</p>
+                        <p class="duration">Jun 2024 – Present</p>
                         <ul>
-                            <li>99.9% data accuracy rate</li>
-                            <li>Scrapping web data, analyze by GPT Models</li>
-                            <li>Reduced errors by 15%</li>
+                            <li>Efficiently manage large volumes of data with 99.9% accuracy</li>
+                            <li>Implement data verification protocols, reducing errors by 15%</li>
+                            <li>Meet tight deadlines while maintaining confidentiality standards</li>
                         </ul>
+                        <div class="skills">
+                            <span>Google Suit</span>
+                            <span>Python</span>
+                            <span>LLM</span>
+                            <span>Excel</span>
+                        </div>
                     </div>
                 </div>
                 <div class="timeline-item right">
                     <div class="timeline-content">
                         <h3>Prime Missions (UK)</h3>
-                        <p>Full-Stack Developer | Nov 2023 – Jun 2024</p>
+                        <p class="role">Full-Stack Web Developer</p>
+                        <p class="duration">Nov 2023 – Jun 2024</p>
                         <ul>
-                            <li>Developed responsive interfaces</li>
-                            <li>Built RESTful APIs</li>
-                                <li>Improved data quality by 20%</li>
+                            <li>Develop responsive, user-friendly web interfaces</li>
+                            <li>Design and develop server-side components and RESTful APIs</li>
+                            <li>Work with cloud platforms and implement DevOps practices</li>
                         </ul>
+                        <div class="skills">
+                            <span>Node.js</span>
+                            <span>AWS</span>
+                            <span>Docker</span>
+                            <span>CI/CD</span>
+                        </div>
                     </div>
                 </div>
                 <div class="timeline-item left">
                     <div class="timeline-content">
-                        <h3>University of Cambridge</h3>
-                        <p>Teaching Assistant | Sep 2021 – Nov 2023</p>
+                        <h3>Rising Codes</h3>
+                        <p class="role">Laravel Developer</p>
+                        <p class="duration">July 2023 – Aug 2023</p>
                         <ul>
-                            <li>Assisted students with programming assignments</li>
-                            <li>Graded assignments and exams</li>
-                            <li>Improved student engagement by 20%</li>
+                            <li>Design and develop web applications using Laravel PHP framework</li>
+                            <li>Bug fixing, performance optimization, and API development</li>
                         </ul>
+                        <div class="skills">
+                            <span>PHP</span>
+                            <span>Laravel</span>
+                            <span>RESTful API</span>
+                            <span>MVC</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Special Communication Org (SCO)</h3>
+                        <p class="role">Telecommunication Intern</p>
+                        <p class="duration">July 2023 – Aug 2023</p>
+                        <ul>
+                            <li>Managed and maintained critical telecom infrastructure</li>
+                            <li>Ensured reliability of telecommunications systems</li>
+                        </ul>
+                        <div class="skills">
+                            <span>GPON</span>
+                            <span>PSTN</span>
+                            <span>GSM</span>
+                            <span>Fiber Optics</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Climaxcode</h3>
+                        <p class="role">Full-Stack Developer Intern</p>
+                        <p class="duration">Aug 2022 – Oct 2022</p>
+                        <ul>
+                            <li>Fixed bugs and wrote unit tests for web applications</li>
+                            <li>Automated PDF report generation, improving efficiency by 120x</li>
+                        </ul>
+                        <div class="skills">
+                            <span>WordPress</span>
+                            <span>PHP</span>
+                            <span>MySQL</span>
+                            <span>Shopify</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Freelance Developer</h3>
+                        <p class="role">Independent Contractor</p>
+                        <p class="duration">Sep 2018 – Present</p>
+                        <ul>
+                            <li>Developed chatbots, ML tasks, websites, and mobile apps</li>
+                            <li>Worked with various technologies and frameworks</li>
+                        </ul>
+                        <div class="skills">
+                            <span>Flutter</span>
+                            <span>Python</span>
+                            <span>Azure</span>
+                            <span>Firebase</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -544,11 +677,20 @@
                 <div class="timeline-item left">
                     <div class="timeline-content">
                         <h3>MUST University</h3>
-                        <p>Bachelor of Science in Computer Science | 2019 – 2023</p>
+                        <p class="role">Bachelor of Science in Computer Science</p>
+                        <p class="duration">Oct 2019 – Nov 2023</p>
                         <ul>
                             <li>GPA: 3.0/4.0,  Ranked 5th/86th</li>
                             <li>First Class Honors, Capstone Project</li>
-                            <li>Relevant coursework: Programming, Artificial Intelligence, Data Structure, Algorithms, Databases, Software Engineering etc.</li>
+                            <div class="skills">
+                                <span>Programming</span>
+                                <span>Artificial Intelligence</span>
+                                <span>Data Structure</span>
+                                <span>Algorithms</span>
+                                <span>Databases</span>
+                                <span>Software Engineering</span>
+                                <span>etc.</span>
+                            </div>
                         </ul>
                     </div>
                 </div>
