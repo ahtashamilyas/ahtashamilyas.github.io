@@ -38,12 +38,147 @@
             height: 100%;
             z-index: -1;
         }
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            font-family: 'Consolas', monospace;
+        }
 
-        /* Terminal-inspired header */
-        .terminal-header {
-            background: var(--primary-color);
-            padding: 2rem;
+        .terminal-loader {
+            width: 80%;
+            max-width: 600px;
+            background: #2d2d2d;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(52, 152, 219, 0.3);
             position: relative;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .loading-text {
+            color: var(--text-color);
+            margin: 10px 0;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(40) infinite;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            animation: loading 2s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        .status-text {
+            color: var(--secondary-color);
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .glitch-effect {
+            color: var(--accent-color);
+            position: relative;
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: 'INITIALIZING SYSTEM';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-effect::before {
+            color: var(--secondary-color);
+            animation: glitch 3s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        }
+
+        .glitch-effect::after {
+            color: var(--accent-color);
+            animation: glitch 2s infinite;
+            clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+        }
+
+        @keyframes typing {
+            0% { width: 0; }
+            50% { width: 100%; }
+            100% { width: 0; }
+        }
+
+        @keyframes loading {
+            0% { width: 0; }
+            50% { width: 100%; }
+            100% { width: 0; }
+        }
+
+        @keyframes glitch {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(2px); }
+            50% { transform: translateX(-2px); }
+            75% { transform: translateX(1px); }
+            100% { transform: translateX(0); }
+        }
+
+        .matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .matrix-line {
+            position: absolute;
+            width: 2px;
+            top: 0;
+            background: var(--secondary-color);
+            filter: blur(1px);
+            opacity: 0.5;
         }
 
         .terminal-window {
@@ -417,6 +552,22 @@
     </style>
 </head>
 <body>
+    <div class="loader-container">
+        <div class="matrix-bg" id="matrix"></div>
+        <h1 class="glitch-effect">INITIALIZING SYSTEM</h1>
+        <div class="terminal-loader">
+            <div class="terminal-header">
+                <div class="terminal-button red"></div>
+                <div class="terminal-button yellow"></div>
+                <div class="terminal-button green"></div>
+            </div>
+            <div class="loading-text">> Establishing secure connection...</div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="status-text" id="status">Loading modules... Please wait...</div>
+        </div>
+    </div>
     <div id="particles-js"></div>
     
     <header class="contact-form">
@@ -731,4 +882,42 @@
     particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json', function() {
         console.log('Particles loaded');
     });
+
+    const matrix = document.getElementById('matrix');
+        const width = window.innerWidth;
+        
+        for (let i = 0; i < 50; i++) {
+            const line = document.createElement('div');
+            line.className = 'matrix-line';
+            line.style.left = Math.random() * width + 'px';
+            line.style.height = Math.random() * 100 + 20 + '%';
+            line.style.animationDuration = Math.random() * 3 + 2 + 's';
+            line.style.animationDelay = Math.random() * 2 + 's';
+            matrix.appendChild(line);
+        }
+
+        // Update status messages
+        const statusMessages = [
+            "Loading modules... Please wait...",
+            "Initializing components...",
+            "Loading dependencies...",
+            "Configuring environment...",
+            "Starting services...",
+            "Almost there..."
+        ];
+
+        let messageIndex = 0;
+        const statusElement = document.getElementById('status');
+
+        setInterval(() => {
+            statusElement.textContent = statusMessages[messageIndex];
+            messageIndex = (messageIndex + 1) % statusMessages.length;
+        }, 2000);
+
+        // Hide loader when page is fully loaded
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loader-container').style.display = 'none';
+            }, 3000);
+        });
 </script>
