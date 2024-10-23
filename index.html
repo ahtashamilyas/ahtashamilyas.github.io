@@ -461,7 +461,40 @@
         .skills span:hover {
             background: rgba(52, 152, 219, 0.4);
         }
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        /* ... (rest of your existing CSS) ... */
 
+        /* New styles for show more functionality */
+        .timeline-item.hidden {
+            display: none;
+        }
+        /* .blur-overlay {
+            position: ;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(to bottom, transparent, white);
+            pointer-events: none;
+        } */
+        .show-more-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .show-more-btn:hover {
+            background-color: #2980b9;
+        }
         /* Code snippet styling */
         .code-snippet {
             background: #1e1e1e;
@@ -1086,6 +1119,8 @@
                     </div>
                 </div>
             </div>
+            <div class="blur-overlay" id="blurOverlay"></div>
+            <button class="show-more-btn" id="showMoreBtn">Show More</button>
         </section>
 
         <section id="education">
@@ -1259,5 +1294,37 @@ document.getElementById('subscribeForm').addEventListener('submit', function(e) 
     // Add your email subscription logic here
     alert(`Thank you for subscribing with: ${email}`);
     this.reset();
+});
+document.addEventListener('DOMContentLoaded', function() {
+    // Specifically target work experience timeline items
+    const workExperienceSection = document.querySelector('#experience .timeline');
+    const timelineItems = workExperienceSection.querySelectorAll('.timeline-item');
+    const blurOverlay = document.getElementById('blurOverlay');
+    const showMoreBtn = document.getElementById('showMoreBtn');
+    let isExpanded = false;
+
+    // Initially hide all work experience items except the first two
+    for (let i = 2; i < timelineItems.length; i++) {
+        timelineItems[i].classList.add('hidden');
+    }
+
+    showMoreBtn.addEventListener('click', function() {
+        isExpanded = !isExpanded;
+        if (isExpanded) {
+            timelineItems.forEach(item => item.classList.remove('hidden'));
+            if (blurOverlay) {
+                blurOverlay.style.display = 'none';
+            }
+            this.textContent = 'Show Less';
+        } else {
+            for (let i = 2; i < timelineItems.length; i++) {
+                timelineItems[i].classList.add('hidden');
+            }
+            if (blurOverlay) {
+                blurOverlay.style.display = 'block';
+            }
+            this.textContent = 'Show More';
+        }
+    });
 });
 </script>
