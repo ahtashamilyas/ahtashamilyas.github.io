@@ -791,6 +791,71 @@
         text-align: center;
     }
 }
+.service_btn{
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-color);
+    padding: 1rem 0.6rem;
+    border-radius: 25px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 1;
+}
+/* Create pseudo-element for the animated background */
+.service_btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        var(--secondary-color),
+        var(--accent-color),
+        var(--primary-color),
+        var(--secondary-color)
+    );
+    background-size: 300% 100%;
+    z-index: -1;
+    animation: gradientFlow 5s linear infinite;
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 150% 50%;
+    }
+    100% {
+        background-position: 300% 50%;
+    }
+}
+
+/* Maintain hover effect */
+.service_btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Add a subtle transition effect when hovering */
+.service_btn::before {
+    transition: all 0.3s ease;
+}
+
+.service_btn:hover::before {
+    animation-duration: 4s; /* Speed up animation on hover */
+}
     </style>
 </head>
 <body>
@@ -825,7 +890,6 @@
             </div>
         </div>
     </header>
-
     <nav>
         <ul>
             <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
@@ -837,6 +901,7 @@
     </nav>
 
     <main>
+        <a href="#services" id="servicesBtn" class="service_btn"></i>Services</a>
         <section id="projects">
             <h2><i class="fas fa-code-branch"></i> Featured Projects</h2>
             <div class="projects-grid">
