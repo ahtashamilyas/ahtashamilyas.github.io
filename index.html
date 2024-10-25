@@ -1040,19 +1040,19 @@
                     </div>
                     <div class="services-grid">
                         <div class="service-card" data-service="webDesign">
-                            <i class="fas fa-paint-brush"></i>
-                            <h4>Web Design</h4>
-                            <p>Custom, responsive designs with a cyberpunk aesthetic</p>
+                            <i class="fas fa-laptop-code"></i>
+                            <h4>Portfolio & Business Websites</h4>
+                            <p>Custom, responsive websites for professionals and small businesses</p>
                         </div>
-                        <div class="service-card" data-service="webDev">
-                            <i class="fas fa-code"></i>
-                            <h4>Web Development</h4>
-                            <p>Full-stack development with cutting-edge technologies</p>
+                        <div class="service-card" data-service="aiSolutions">
+                            <i class="fas fa-brain"></i>
+                            <h4>AI & ML Solutions</h4>
+                            <p>Custom AI models and machine learning solutions</p>
                         </div>
-                        <div class="service-card" data-service="mobileDev">
-                            <i class="fas fa-mobile-alt"></i>
-                            <h4>Mobile App Development</h4>
-                            <p>Native and cross-platform mobile applications</p>
+                        <div class="service-card" data-service="automation">
+                            <i class="fas fa-robot"></i>
+                            <h4>Automation & Data</h4>
+                            <p>Process automation and data processing solutions</p>
                         </div>
                     </div>
                 </div>
@@ -1524,43 +1524,46 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
     // Service details data
     const servicesData = {
-        webDesign: {
-            title: "Web Design",
-            description: `Our web design service includes:
-                • Custom UI/UX design
-                • Responsive layouts
-                • Modern cyberpunk aesthetics
-                • Interactive prototypes
-                • Brand integration
-                • Mobile-first approach`,
-            pricing: "Starting from $1,000",
-            duration: "2-4 weeks"
-        },
-        webDev: {
-            title: "Web Development",
-            description: `Our web development service includes:
-                • Full-stack development
-                • Custom CMS integration
-                • E-commerce solutions
-                • API development
-                • Performance optimization
-                • Security implementation`,
-            pricing: "Starting from $2,500",
-            duration: "4-8 weeks"
-        },
-        mobileDev: {
-            title: "Mobile App Development",
-            description: `Our mobile app development service includes:
-                • Native iOS/Android development
-                • Cross-platform solutions
-                • UI/UX design
-                • Backend integration
-                • App store deployment
-                • Maintenance and support`,
-            pricing: "Starting from $5,000",
-            duration: "8-12 weeks"
-        }
-    };
+    webDesign: {
+        title: "Personal Portfolio & Small Business Websites",
+        description: `Custom website development services for individuals and small businesses:
+            • Professional portfolio websites
+            • Small business landing pages
+            • Responsive layouts
+            • Mobile-friendly design
+            • WordPress integration
+            • SEO optimization
+            • Hosting setup`,
+        pricing: "Starting from $100",
+        duration: "1-3 weeks"
+    },
+    aiSolutions: {
+        title: "AI & ML Solutions",
+        description: `Specialized artificial intelligence and machine learning services:
+            • Custom ML models
+            • Custom GPT Models
+            • Recommendation systems
+            • Natural Language Processing
+            • Deep learning implementation
+            • AI model optimization
+            • Data analysis`,
+        pricing: "Starting from $250",
+        duration: "2-4 weeks"
+    },
+    automation: {
+        title: "Automation & Data Solutions",
+        description: `Automation and data processing services:
+            • Web scraping solutions
+            • Data entry automation
+            • Form automation
+            • Process automation
+            • Excel/Sheets automation
+            • Basic chatbot development
+            • Data visualization`,
+        pricing: "Starting from $50",
+        duration: "1-2 weeks"
+    }
+};
     
     // Wait for DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function() {
