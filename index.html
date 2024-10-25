@@ -856,6 +856,130 @@
 .service_btn:hover::before {
     animation-duration: 4s; /* Speed up animation on hover */
 }
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    background: var(--card-bg);
+    margin: 1% auto;
+    padding: 20px;
+    width: 70%;
+    max-width: 800px;
+    overflow-y: auto;
+    border: 1px solid var(--secondary-color);
+    box-shadow: 0 0 20px var(--secondary-color);
+    animation: modalOpen 0.3s ease-out;
+}
+
+@keyframes modalOpen {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.close {
+    color: var(--text-color);
+    font-size: 28px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: var(--accent-color);
+}
+
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.service-card {
+    background: rgba(45, 45, 45, 0.8);
+    padding: 20px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--secondary-color);
+}
+
+.service-card i {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+/* Form Styles */
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    color: var(--secondary-color);
+}
+
+.form-group input,
+.form-group textarea {
+    background: var(--dark-bg);
+    border: 1px solid var(--secondary-color);
+    padding: 10px;
+    color: var(--text-color);
+    border-radius: 4px;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.neon-button {
+    background: transparent;
+    border: 1px solid var(--secondary-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 20px;
+}
+
+.neon-button:hover {
+    background: var(--secondary-color);
+    box-shadow: 0 0 10px var(--secondary-color);
+}
     </style>
 </head>
 <body>
@@ -902,6 +1026,89 @@
 
     <main>
         <a href="#services" id="servicesBtn" class="service_btn"></i>Services</a>
+        <div id="servicesModal" class="modal">
+            <div class="modal-content">
+                <div class="terminal-window">
+                    <div class="terminal-buttons">
+                        <div class="terminal-button red"></div>
+                        <div class="terminal-button yellow"></div>
+                        <div class="terminal-button green"></div>
+                    </div>
+                    <div class="modal-header">
+                        <h3>Available Services</h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card" data-service="webDesign">
+                            <i class="fas fa-paint-brush"></i>
+                            <h4>Web Design</h4>
+                            <p>Custom, responsive designs with a cyberpunk aesthetic</p>
+                        </div>
+                        <div class="service-card" data-service="webDev">
+                            <i class="fas fa-code"></i>
+                            <h4>Web Development</h4>
+                            <p>Full-stack development with cutting-edge technologies</p>
+                        </div>
+                        <div class="service-card" data-service="mobileDev">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h4>Mobile App Development</h4>
+                            <p>Native and cross-platform mobile applications</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Service Details Modal -->
+        <div id="serviceDetailsModal" class="modal">
+            <div class="modal-content">
+                <div class="terminal-window">
+                    <div class="terminal-buttons">
+                        <div class="terminal-button red"></div>
+                        <div class="terminal-button yellow"></div>
+                        <div class="terminal-button green"></div>
+                    </div>
+                    <div class="modal-header">
+                        <h3 id="serviceTitle">Service Details</h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div id="serviceDetails"></div>
+                    <button class="neon-button" id="bookServiceBtn">Book This Service</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Booking Form Modal -->
+        <div id="bookingModal" class="modal">
+            <div class="modal-content">
+                <div class="terminal-window">
+                    <div class="terminal-buttons">
+                        <div class="terminal-button red"></div>
+                        <div class="terminal-button yellow"></div>
+                        <div class="terminal-button green"></div>
+                    </div>
+                    <div class="modal-header">
+                        <h3>Book Service</h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <form id="bookingForm" class="booking-form" action="https://formspree.io/f/xgveezyn" method="POST">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Project Details:</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="neon-button">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
         <section id="projects">
             <h2><i class="fas fa-code-branch"></i> Featured Projects</h2>
             <div class="projects-grid">
@@ -1314,3 +1521,122 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+<script>
+    // Service details data
+    const servicesData = {
+        webDesign: {
+            title: "Web Design",
+            description: `Our web design service includes:
+                • Custom UI/UX design
+                • Responsive layouts
+                • Modern cyberpunk aesthetics
+                • Interactive prototypes
+                • Brand integration
+                • Mobile-first approach`,
+            pricing: "Starting from $1,000",
+            duration: "2-4 weeks"
+        },
+        webDev: {
+            title: "Web Development",
+            description: `Our web development service includes:
+                • Full-stack development
+                • Custom CMS integration
+                • E-commerce solutions
+                • API development
+                • Performance optimization
+                • Security implementation`,
+            pricing: "Starting from $2,500",
+            duration: "4-8 weeks"
+        },
+        mobileDev: {
+            title: "Mobile App Development",
+            description: `Our mobile app development service includes:
+                • Native iOS/Android development
+                • Cross-platform solutions
+                • UI/UX design
+                • Backend integration
+                • App store deployment
+                • Maintenance and support`,
+            pricing: "Starting from $5,000",
+            duration: "8-12 weeks"
+        }
+    };
+    
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get modal elements
+        const servicesModal = document.getElementById('servicesModal');
+        const serviceDetailsModal = document.getElementById('serviceDetailsModal');
+        const bookingModal = document.getElementById('bookingModal');
+        const serviceTitle = document.getElementById('serviceTitle');
+        const serviceDetailsElement = document.getElementById('serviceDetails');
+        const bookServiceBtn = document.getElementById('bookServiceBtn');
+        const bookingForm = document.getElementById('bookingForm');
+        const servicesBtn = document.getElementById('servicesBtn');
+        const closeButtons = document.getElementsByClassName('close');
+    
+        // Services button click handler
+        servicesBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            servicesModal.style.display = 'block';
+        });
+    
+        // Service card click handler
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const service = card.dataset.service;
+                const details = servicesData[service];
+                
+                if (details) {
+                    serviceTitle.textContent = details.title;
+                    serviceDetailsElement.innerHTML = `
+                        <div class="service-details">
+                            <p>${details.description}</p>
+                            <p><strong>Pricing:</strong> ${details.pricing}</p>
+                            <p><strong>Duration:</strong> ${details.duration}</p>
+                        </div>
+                    `;
+                    
+                    servicesModal.style.display = 'none';
+                    serviceDetailsModal.style.display = 'block';
+                }
+            });
+        });
+    
+        // Book service button click handler
+        bookServiceBtn.addEventListener('click', () => {
+            serviceDetailsModal.style.display = 'none';
+            bookingModal.style.display = 'block';
+        });
+    
+        // Booking form submit handler
+        // bookingForm.addEventListener('submit', (e) => {
+        //     e.preventDefault();
+            
+        //     // Here you would typically send the form data to your server
+        //     alert('Thank you for your booking request! We will contact you soon.');
+            
+        //     // Reset form and close modal
+        //     bookingForm.reset();
+        //     bookingModal.style.display = 'none';
+        // });
+    
+        // Close button handlers
+        Array.from(closeButtons).forEach(button => {
+            button.addEventListener('click', () => {
+                servicesModal.style.display = 'none';
+                serviceDetailsModal.style.display = 'none';
+                bookingModal.style.display = 'none';
+            });
+        });
+    
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === servicesModal) servicesModal.style.display = 'none';
+            if (e.target === serviceDetailsModal) serviceDetailsModal.style.display = 'none';
+            if (e.target === bookingModal) bookingModal.style.display = 'none';
+        });
+    });
+    </script>
+    </body>
+</html>
