@@ -980,6 +980,175 @@
     background: var(--secondary-color);
     box-shadow: 0 0 10px var(--secondary-color);
 }
+/* ===================================================== */
+/* == Tabs & Show More Education & Certs Section Styles == */
+/* ===================================================== */
+
+.edu-certs-tabs {
+    display: flex;
+    justify-content: center; /* Or start? Let's align with heading */
+    margin-bottom: 1.5rem; /* Align with h2 margin */
+    border-bottom: 1px solid var(--primary-color); /* Use a theme color */
+}
+
+.tab-button {
+    padding: 0.5rem 1rem; /* Match nav link padding */
+    margin-right: 0.5rem; /* Space between tabs */
+    cursor: pointer;
+    border: 1px solid transparent; /* Match nav link border */
+    border-bottom: none; /* Remove bottom part of border */
+    background-color: transparent;
+    font-size: 0.95rem; /* Adjust as needed */
+    color: var(--text-color); /* Use theme text color */
+    transition: all 0.3s; /* Match nav link transition */
+    font-family: 'Consolas', monospace; /* Ensure font */
+}
+
+.tab-button:hover {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color); /* Match nav hover border */
+    background: rgba(52, 152, 219, 0.1); /* Subtle background like nav hover */
+}
+
+.tab-button.active {
+    color: var(--secondary-color);
+    font-weight: bold;
+    border-color: var(--secondary-color);
+    border-bottom-color: var(--dark-bg); /* Make bottom border blend with background */
+    background: rgba(52, 152, 219, 0.1); /* Keep subtle background for active */
+    position: relative;
+    top: 1px; /* Align visually with content area */
+}
+
+.tab-content {
+    display: none; /* Hide inactive tabs */
+    animation: fadeIn 0.5s ease; /* Optional fade-in */
+}
+
+.tab-content.active {
+    display: block; /* Show active tab */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* List Item Styling (Compact) */
+.education-list,
+.certs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.education-list li,
+.certs-list li.cert-item { /* Target cert items specifically here */
+    padding: 10px 0 12px 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.education-list li:last-child,
+.certs-list li.cert-item:last-child {
+     border-bottom: none;
+}
+
+/* Consistent paragraph margins */
+.education-list li p,
+.certs-list li p {
+    margin: 0 0 4px 0; /* Keep tight spacing */
+    line-height: 1.4;
+}
+
+.item-title {
+    font-weight: bold;
+    font-size: 1.0rem; /* Keep slightly smaller */
+    color: var(--secondary-color); /* Highlight title with secondary color */
+}
+
+/* NEW: Style for education descriptions */
+.item-description {
+    font-size: 0.85rem;
+    color: #bdc3c7; /* Slightly dimmer text for description */
+    padding-left: 10px; /* Indent description slightly */
+    border-left: 2px solid var(--primary-color); /* Subtle left border */
+    margin-top: 8px;
+}
+.item-description p {
+    margin: 0 0 5px 0; /* Spacing between description lines */
+}
+.item-description strong {
+    color: var(--text-color); /* Make labels stand out slightly */
+}
+
+
+.item-credential {
+    font-size: 0.85rem;
+    color: #95a5a6;
+    margin-top: 3px;
+}
+
+.item-credential .selectable {
+    font-family: 'Consolas', monospace;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 2px 5px;
+    border-radius: 3px;
+    user-select: all;
+    cursor: text;
+    margin-left: 4px;
+}
+
+/* UPDATED: Make .certs-list a grid */
+.certs-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Create 2 columns */
+    gap: 0 1.5rem; /* Add gap between columns only (row-gap column-gap) */
+}
+
+/* Ensure list items don't have extra margin causing layout issues in grid */
+.certs-list li.cert-item {
+    margin-bottom: 0; /* Already set, but ensure */
+    padding-bottom: 12px; /* Ensure padding for spacing */
+}
+
+
+/* UPDATED: Hide 7th item onwards by default */
+#certs-content .cert-item:nth-child(n+7) {
+    display: none;
+}
+
+#certs-content.expanded .cert-item { /* Show all items when expanded */
+    display: block; /* Revert to default block display */
+}
+
+.show-more-certs {
+    display: inline-block; /* Initially hidden by inline style, shown by JS */
+    margin-top: 1rem;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    background-color: var(--primary-color); /* Match theme */
+    border: 1px solid var(--secondary-color); /* Use theme border */
+    color: var(--text-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    font-family: 'Consolas', monospace; /* Ensure font */
+}
+
+.show-more-certs:hover {
+    background-color: var(--secondary-color); /* Highlight on hover */
+    border-color: var(--secondary-color);
+    color: var(--dark-bg);
+}
+/* Responsive: Revert to single column on smaller screens */
+@media (max-width: 600px) { /* Adjust breakpoint as needed */
+    .certs-list {
+        grid-template-columns: 1fr; /* Stack items in one column */
+        gap: 0; /* Remove grid gap */
+    }
+}
     </style>
 </head>
 <body>
@@ -1019,7 +1188,7 @@
             <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
             <li><a href="#skills"><i class="fas fa-brain"></i> Skills</a></li>
             <li><a href="#experience"><i class="fas fa-history"></i> Experience</a></li>
-            <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+            <li><a href="#education-certs"><i class="fas fa-graduation-cap"></i> Education</a></li>
             <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
     </nav>
@@ -1338,31 +1507,204 @@
             <button class="show-more-btn" id="showMoreBtn">Show More</button>
         </section>
 
-        <section id="education">
-            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>MUST University</h3>
-                        <p class="role">Bachelor of Science in Computer Science</p>
-                        <p class="duration">Oct 2019 – Nov 2023</p>
-                        <ul>
-                            <li>GPA: 3.0/4.0,  Ranked 5th/86th</li>
-                            <li>First Class Honors, Capstone Project</li>
-                            <div class="skills">
-                                <span>Programming</span>
-                                <span>Artificial Intelligence</span>
-                                <span>Data Structure</span>
-                                <span>Algorithms</span>
-                                <span>Databases</span>
-                                <span>Software Engineering</span>
-                                <span>etc.</span>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
+        <section id="education-certs">
+            <h2><i class="fas fa-user-graduate"></i> Education & Certifications</h2>
+        
+            <div class="edu-certs-tabs">
+                <button class="tab-button active" data-target="education-content">Formal Education</button>
+                <button class="tab-button" data-target="certs-content">Certifications & Courses</button>
             </div>
-        </section>
+        
+            <div class="edu-certs-content-area">
+        
+                <div id="education-content" class="tab-content active">
+                    <ul class="education-list">
+                        <li>
+                            <p class="item-title">Master of Science, Artificial Intelligence and Intelligent Systems</p>
+                            <p class="item-details">
+                                <span style="color: var(--accent-color); font-weight: bold; margin-bottom: 5px;">University of Bremen</span> | <span class="item-duration">Oct 2024 - Present</span>
+                            </p>
+                            <div class="item-description"> <p><strong>First Semester Courses:</strong> F-AMAI (Advanced Methods of AI), F-AML (Advanced Machine Learning), F-IIS (Integrated Intelligent Systems), F-ATE (AI Algorithms: Theory and Engineering)</p>
+                                <p><strong>Second Semester Focus:</strong> Specialization in Machine Learning and Cognitive Robotics, Master Project: ACRAMbly, Autonomous and Intelligent Systems</p>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="item-title">Bachelor of Science - BS, Computer Science</p>
+                            <p class="item-details">
+                                <span style="color: var(--accent-color); font-weight: bold; margin-bottom: 5px;">Mirpur University of Science & Technology (MUST)</span> | <span class="item-duration">Sep 2019 - Dec 2023</span>
+                            </p>
+                             <div class="item-description"> <p>Graduated with First Class Honors and CGPA of 3.00/4.00. (70.85% Marks) </p> <p>Ranked 5th/86th, Capstone Project, Earned Dean's List recognition for academic excellence.</p><p> Completed a research project on University’s Research Papers. (GitHub | Thesis) </p> </div>
+                        </li>
+                    </ul>
+                </div>
+        
+                <div id="certs-content" class="tab-content">
+                    <ul class="certs-list">
+                        <li class="cert-item">
+                            <p class="item-title">Data Scientist Associate</p>
+                            <p class="item-details">
+                                <span class="item-issuer">DataCamp</span> | <span class="item-date">Issued: Mar 2025</span>
+                            </p>
+                            <p class="item-credential">
+                                Credential ID: <a href="https://www.datacamp.com/certificate/DSA0016892666406" target="_blank" class="selectable">DSA0016892666406</a>
+                            </p>
+                        </li>
+                        <li class="cert-item">
+                            <p class="item-title">Python Data Associate</p>
+                            <p class="item-details">
+                                <span class="item-issuer">DataCamp</span> | <span class="item-date">Issued: Mar 2025</span>
+                            </p>
+                            <p class="item-credential">
+                                Credential ID: <a href="https://www.datacamp.com/certificate/PDA0014426478528" target="_blank" class="selectable">PDA0014426478528</a>
+                            </p>
+                        </li>
+                        <li class="cert-item">
+                            <p class="item-title">Deep Learning with PyTorch : Image Segmentation</p>
+                            <p class="item-details">
+                                <span class="item-issuer">Coursera</span> | <span class="item-date">Issued: June, 2024</span>
+                            </p>
+                            <p class="item-credential">
+                                Credential ID: <a href="https://coursera.org/verify/6VNJ693QEB4Z" target="_blank" class="selectable">6VNJ693QEB4Z</a>
+                            </p>
+                        </li>
+                        <li class="cert-item">
+                            <p class="item-title">Programming for Everybody (Getting Started with Python)</p>
+                            <p class="item-details">
+                                <span class="item-issuer">University of Michigan (via Coursera)</span> | <span class="item-date">Completed: May 2024</span>
+                            </p>
+                            <p class="item-credential">
+                                Credential ID: <a href="https://coursera.org/verify/MLKLDTPN8RZ9" target="_blank" class="selectable">MLKLDTPN8RZ9</a>
+                            </p>
+                        </li>
+                        <li class="cert-item">
+                            <p class="item-title">Generative AI with Large Language Models</p>
+                            <p class="item-details">
+                                <span class="item-issuer">AWS, DeepLearning.AI (via Coursera)</span> | <span class="item-date">Completed: Dec 2023</span>
+                            </p>
+                            <p class="item-credential">
+                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/verify/ZLDVN62CV5DD" target="_blank" class="selectable">ZLDVN62CV5DD</a>
+                            </p>
+                        </li>
+                        <li class="cert-item">
+                            <p class="item-title">The Raspberry Pi Platform and Python Programming for the Raspberry Pi</p>
+                            <p class="item-details">
+                                <span class="item-issuer">University of California, Irvine (via Coursera)</span> | <span class="item-date">Issue:Dec 2023</span>
+                            </p>
+                            <p class="item-credential">
+                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/verify/B2AR59L7YKTA" target="_blank" class="selectable">B2AR59L7YKTA</a>
+                            </p>
+                        </li>
+                        <li class="cert-item">
+                            <p class="item-title">Specialization in Machine Learning</p>
+                            <p class="item-details">
+                                <span class="item-issuer">DeepLearning.AI (via Coursera)</span> | <span class="item-date">Completed: February, 2023</span>
+                            </p>
+                            <p class="item-credential">
+                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/specialization/N5P4CZQ9XJUD" target="_blank" class="selectable">N5P4CZQ9XJUD</a>
+                            </p>
+                        </li>
+                        <li class="cert-item">
+                            <p class="item-title">Advanced Learning Algorithms</p>
+                            <p class="item-details">
+                                <span class="item-issuer">DeepLearning.AI (via Coursera)</span> | <span class="item-date">Issued: July, 2023</span>
+                            </p>
+                            <p class="item-credential">
+                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/verify/2QEN9V64F2GQ" target="_blank" class="selectable">2QEN9V64F2GQ</a>
+                            </p>
+                        </li>
+                        <li class="cert-item">
+                            <p class="item-title">Supervised Machine Learning: Regression and Classification</p>
+                            <p class="item-details">
+                                <span class="item-issuer">DeepLearning.AI (via Coursera)</span> | <span class="item-date">Completed: May 2023</span>
+                            </p>
+                            <p class="item-credential">
+                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/certificate/UTJ7E8KCB55B" target="_blank" class="selectable">UTJ7E8KCB55B</a>
+                            </p>
+                        </li>
+                        <li class="cert-item">
+                            <p class="item-title">Microsoft Azure for Data Engineering</p>
+                            <p class="item-details">
+                                <span class="item-issuer">Microsoft</span> | <span class="item-date">Completed: Mar 2023</span>
+                            </p>
+                            <p class="item-credential">
+                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/certificate/DCHPJULT5G9C" target="_blank" class="selectable">DCHPJULT5G9C</a>
+                            </p>
+                        </li>
+                        <li class="cert-item">
+                            <p class="item-title">Python for Data Science, AI & Development</p>
+                            <p class="item-details">
+                                <span class="item-issuer">IBM</span> | <span class="item-date">Completed: Mar 2023</span>
+                            </p>
+                            <p class="item-credential">
+                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/certificate/PAG6QNHAK38P" target="_blank" class="selectable">PAG6QNHAK38P</a>
+                            </p>
+                        </li>
+                        <li class="cert-item">
+                            <p class="item-title">What is Data Science?</p>
+                            <p class="item-details">
+                                <span class="item-issuer">IBM</span> | <span class="item-date">Completed: Mar 2023</span>
+                            </p>
+                            <p class="item-credential">
+                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/verify/2QEN9V64F2GQ" target="_blank" class="selectable">2QEN9V64F2GQ</a>
+                            </p>
+                        </li>
+                        </ul>
+                    <button class="show-more-certs" style="display: none;">Show More</button>
+                </div>
+            </div><script>document.addEventListener('DOMContentLoaded', () => {
+                const tabContainer = document.querySelector('.edu-certs-tabs');
+                const contentArea = document.querySelector('.edu-certs-content-area');
+                const certsContent = document.getElementById('certs-content');
+                const certsList = certsContent?.querySelector('.certs-list');
+                const showMoreButton = certsContent?.querySelector('.show-more-certs');
+                const certItems = certsList?.querySelectorAll('.cert-item');
+            
+                // --- UPDATE THIS VALUE ---
+                const INITIAL_VISIBLE_CERTS = 6; // Number of certificates to show initially (2 columns x 3 rows)
+            
+                // --- Tab Switching Logic (Remains the same) ---
+                if (tabContainer && contentArea) {
+                    tabContainer.addEventListener('click', (event) => {
+                        if (event.target.classList.contains('tab-button')) {
+                            const targetId = event.target.dataset.target;
+                            const targetContent = document.getElementById(targetId);
+            
+                            tabContainer.querySelectorAll('.tab-button').forEach(btn => {
+                                btn.classList.remove('active');
+                            });
+                            event.target.classList.add('active');
+            
+                            contentArea.querySelectorAll('.tab-content').forEach(content => {
+                                content.classList.remove('active');
+                            });
+                            if (targetContent) {
+                                targetContent.classList.add('active');
+                            }
+                        }
+                    });
+                }
+            
+                // --- Show More/Less Logic (Updates button text based on new constant) ---
+                if (certsList && showMoreButton && certItems && certItems.length > INITIAL_VISIBLE_CERTS) {
+                    showMoreButton.style.display = 'inline-block';
+                    // Update button text calculation
+                    showMoreButton.textContent = `Show More (${certItems.length - INITIAL_VISIBLE_CERTS})`;
+            
+                    showMoreButton.addEventListener('click', () => {
+                        certsContent.classList.toggle('expanded');
+            
+                        if (certsContent.classList.contains('expanded')) {
+                            showMoreButton.textContent = 'Show Less';
+                        } else {
+                            // Update button text calculation
+                            showMoreButton.textContent = `Show More (${certItems.length - INITIAL_VISIBLE_CERTS})`;
+                        }
+                    });
+                } else if (showMoreButton) {
+                     showMoreButton.style.display = 'none';
+                }
+            
+            });</script> </section>
         <!-- <section id="education">    <h2><i class="fas fa</section> -->
         <section id="contact">
             <h2><i class="fas fa-envelope"></i> Contact Me</h2>
