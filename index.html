@@ -1,1987 +1,767 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahtasham Ilyas | Full Stack Developer</title>
-    <link rel="icon" type="image/x-icon" href="./image/Ahtasham.png">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --text-color: #ecf0f1;
-            --dark-bg: #1a1a1a;
-            --card-bg: #2d2d2d;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Consolas', monospace;
-        }
-
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        .loader-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            font-family: 'Consolas', monospace;
-        }
-
-        .terminal-loader {
-            width: 80%;
-            max-width: 600px;
-            background: #2d2d2d;
-            border-radius: 6px;
-            padding: 20px;
-            box-shadow: 0 0 30px rgba(52, 152, 219, 0.3);
-            position: relative;
-        }
-
-        .terminal-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .terminal-button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-
-        .red { background: #ff5f56; }
-        .yellow { background: #ffbd2e; }
-        .green { background: #27c93f; }
-
-        .loading-text {
-            color: var(--text-color);
-            margin: 10px 0;
-            font-size: 14px;
-            white-space: nowrap;
-            overflow: hidden;
-            animation: typing 3s steps(40) infinite;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: var(--primary-color);
-            border-radius: 2px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-
-        .progress {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
-            animation: loading 2s ease-in-out infinite;
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
-        }
-
-        .status-text {
-            color: var(--secondary-color);
-            font-size: 12px;
-            margin-top: 10px;
-        }
-
-        .glitch-effect {
-            color: var(--accent-color);
-            position: relative;
-            font-size: 24px;
-            margin-bottom: 30px;
-            text-shadow: 0 0 10px var(--accent-color);
-        }
-
-        .glitch-effect::before,
-        .glitch-effect::after {
-            content: 'INITIALIZING SYSTEM';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .glitch-effect::before {
-            color: var(--secondary-color);
-            animation: glitch 3s infinite;
-            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-        }
-
-        .glitch-effect::after {
-            color: var(--accent-color);
-            animation: glitch 2s infinite;
-            clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
-        }
-
-        @keyframes typing {
-            0% { width: 0; }
-            50% { width: 100%; }
-            100% { width: 0; }
-        }
-
-        @keyframes loading {
-            0% { width: 0; }
-            50% { width: 100%; }
-            100% { width: 0; }
-        }
-
-        @keyframes glitch {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(2px); }
-            50% { transform: translateX(-2px); }
-            75% { transform: translateX(1px); }
-            100% { transform: translateX(0); }
-        }
-
-        .matrix-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-        .matrix-line {
-            position: absolute;
-            width: 2px;
-            top: 0;
-            background: var(--secondary-color);
-            filter: blur(1px);
-            opacity: 0.5;
-        }
-
-        .terminal-window {
-            background: var(--dark-bg);
-            border-radius: 5px;
-            padding: 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-
-        .terminal-buttons {
-            display: flex;
-            margin-bottom: 1rem;
-        }
-
-        .terminal-button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-
-        .terminal-button.red { background: #ff5f56; }
-        .terminal-button.yellow { background: #ffbd2e; }
-        .terminal-button.green { background: #27c93f; }
-
-        .terminal-content {
-            font-family: 'Consolas', monospace;
-        }
-
-        .cursor {
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* Navigation */
-        nav {
-            background: rgba(44, 62, 80, 0.9);
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(5px);
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-
-        nav ul li a {
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            margin: 0 0.5rem;
-            transition: all 0.3s;
-            border: 1px solid transparent;
-        }
-
-        nav ul li a:hover {
-            border-color: var(--secondary-color);
-            background: rgba(52, 152, 219, 0.2);
-        }
-
-        /* Main content */
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 20px;
-        }
-
-        section {
-            margin-bottom: 4rem;
-        }
-
-        h2 {
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        h2 i {
-            margin-right: 1rem;
-        }
-
-        /* Project cards */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-            transition: transform 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-        
-
-        /* Skills visualization */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .skill-category {
-            background: #34495e;
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .skill-category h3 {
-            color: var(--secondary-color);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 0.5rem;
-        }
-        .skill-item {
-            margin-bottom: 1.2rem;
-        }
-        .skill-info {
-            display: flex;
-            justify-content: space-between;
-        }
-        .skill-name {
-            font-weight: bold;
-        }
-
-        .skill-bar {
-            height: 12px;
-            background: var(--primary-color);
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
-            border-radius: 10px;
-            transition: 0.5s ease-in-out;
-        }
-
-        /* Timeline for experience */
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 3px;
-            background: var(--secondary-color);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -1px;
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
-        }
-
-        .timeline-item {
-            padding: 15px 50px;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-            margin-bottom: 30px;
-        }
-        .timeline-content {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            background: var(--accent-color);
-            border: 4px solid var(--secondary-color);
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
-            transition: background 0.3s;
-        }
-
-        .timeline-item.left {
-            left: 0;
-        }
-
-        .timeline-item.right {
-            left: 50%;
-        }
-
-        .timeline-item.left::after {
-            right: -12px;
-        }
-
-        .timeline-item.right::after {
-            left: -12px;
-        }
-        .timeline-content h3 {
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-            font-size: 1.4rem;
-        }
-        .timeline-content .role {
-            color: var(--accent-color);
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .timeline-content .duration {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-        .timeline-content ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-        .timeline-content ul li {
-            margin-bottom: 8px;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .skills span {
-            background: rgba(52, 152, 219, 0.2);
-            color: var(--secondary-color);
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            transition: background 0.3s;
-        }
-
-        .skills span:hover {
-            background: rgba(52, 152, 219, 0.4);
-        }
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        /* ... (rest of your existing CSS) ... */
-
-        /* New styles for show more functionality */
-        .timeline-item.hidden {
-            display: none;
-        }
-        /* .blur-overlay {
-            position: ;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 50px;
-            background: linear-gradient(to bottom, transparent, white);
-            pointer-events: none;
-        } */
-        .show-more-btn {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .show-more-btn:hover {
-            background-color: #2980b9;
-        }
-        /* Code snippet styling */
-        .code-snippet {
-            background: #1e1e1e;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
-
-        .code-line {
-            display: block;
-            color: #d4d4d4;
-        }
-
-        .code-keyword { color: #569cd6; }
-        .code-string { color: #ce9178; }
-        .code-function { color: #dcdcaa; }
-
-        /* Contact form */
-        .contact-form {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 8px;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.5rem;
-            background: var(--dark-bg);
-            border: 1px solid var(--secondary-color);
-            color: var(--text-color);
-            border-radius: 4px;
-        }
-
-        button {
-            background: var(--secondary-color);
-            color: var(--text-color);
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background: var(--accent-color);
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .timeline::after {
-                left: 31px;
-            }
-
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-
-            .timeline-item.right {
-                left: 0;
-            }
-
-            .timeline-item.left::after,
-            .timeline-item.right::after {
-                left: 21px;
-            }
-            .timeline-content {
-                padding: 15px;
-            }
-        }
-        .footer {
-    background: var(--card-bg);
-    padding: 3rem 1rem 1rem;
-    margin-top: 4rem;
-    position: relative;
-    border-top: 4px solid;
-    border-image: linear-gradient(90deg, var(--secondary-color), var(--accent-color)) 1;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    padding: 0 20px;
-}
-
-.footer-section h3 {
-    color: var(--secondary-color);
-    margin-bottom: 1.5rem;
-    font-size: 1.2rem;
-    position: relative;
-    padding-bottom: 0.5rem;
-}
-
-.footer-section h3::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
-}
-
-/* Connect Section Styles */
-.connect-section {
-    grid-column: span 2;
-}
-
-.connect-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-}
-
-.social-link {
-    color: var(--text-color);
-    font-size: 1.5rem;
-    transition: all 0.3s ease;
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(52, 152, 219, 0.1);
-}
-
-.social-link:hover {
-    color: var(--accent-color);
-    transform: translateY(-3px);
-    background: rgba(52, 152, 219, 0.2);
-}
-
-/* CV Download Button Styles */
-.cv-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
-    color: var(--text-color);
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    white-space: nowrap;
-}
-
-.cv-download:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Other Footer Sections */
-.footer-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-.footer-nav a {
-    color: var(--text-color);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    position: relative;
-    width: fit-content;
-}
-
-.footer-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--secondary-color);
-    transition: width 0.3s ease;
-}
-
-.footer-nav a:hover {
-    color: var(--secondary-color);
-}
-
-.footer-nav a:hover::after {
-    width: 100%;
-}
-
-.contact-info p {
-    margin-bottom: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.contact-info i {
-    color: var(--secondary-color);
-}
-
-.footer-bottom {
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.back-to-top {
-    background: var(--secondary-color);
-    color: var(--text-color);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-    box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
-}
-
-.back-to-top:hover {
-    background: var(--accent-color);
-    transform: translateY(-3px);
-}
-
-@media (max-width: 1024px) {
-    .connect-section {
-        grid-column: span 1;
-    }
-}
-
-@media (max-width: 768px) {
-    .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    
-    .footer-section h3::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    
-    .connect-wrapper {
-        align-items: center;
-    }
-    .social-links {
-        justify-content: center;
-    }
-    
-    .footer-nav a {
-        margin: 0 auto;
-    }
-    
-    .contact-info p {
-        justify-content: center;
-    }
-    
-    .footer-bottom {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-}
-.service_btn{
-    position: fixed;
-    right: 2rem;
-    bottom: 2rem;
-    z-index: 1000;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--text-color);
-    padding: 1rem 0.6rem;
-    border-radius: 25px;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    white-space: nowrap;
-    overflow: hidden;
-    z-index: 1;
-}
-/* Create pseudo-element for the animated background */
-.service_btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        90deg,
-        var(--secondary-color),
-        var(--accent-color),
-        var(--primary-color),
-        var(--secondary-color)
-    );
-    background-size: 300% 100%;
-    z-index: -1;
-    animation: gradientFlow 5s linear infinite;
-}
-
-@keyframes gradientFlow {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 150% 50%;
-    }
-    100% {
-        background-position: 300% 50%;
-    }
-}
-
-/* Maintain hover effect */
-.service_btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Add a subtle transition effect when hovering */
-.service_btn::before {
-    transition: all 0.3s ease;
-}
-
-.service_btn:hover::before {
-    animation-duration: 4s; /* Speed up animation on hover */
-}
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    backdrop-filter: blur(5px);
-}
-
-.modal-content {
-    position: relative;
-    background: var(--card-bg);
-    margin: 1% auto;
-    padding: 20px;
-    width: 70%;
-    max-width: 800px;
-    overflow-y: auto;
-    border: 1px solid var(--secondary-color);
-    box-shadow: 0 0 20px var(--secondary-color);
-    animation: modalOpen 0.3s ease-out;
-}
-
-@keyframes modalOpen {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--secondary-color);
-}
-
-.close {
-    color: var(--text-color);
-    font-size: 28px;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.close:hover {
-    color: var(--accent-color);
-}
-
-/* Services Grid */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
-}
-
-.service-card {
-    background: rgba(45, 45, 45, 0.8);
-    padding: 20px;
-    border: 1px solid var(--secondary-color);
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-align: center;
-}
-
-.service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px var(--secondary-color);
-}
-
-.service-card i {
-    font-size: 2.5rem;
-    color: var(--secondary-color);
-    margin-bottom: 15px;
-}
-
-/* Form Styles */
-.booking-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.form-group label {
-    color: var(--secondary-color);
-}
-
-.form-group input,
-.form-group textarea {
-    background: var(--dark-bg);
-    border: 1px solid var(--secondary-color);
-    padding: 10px;
-    color: var(--text-color);
-    border-radius: 4px;
-}
-
-.form-group textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-.neon-button {
-    background: transparent;
-    border: 1px solid var(--secondary-color);
-    color: var(--text-color);
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-top: 20px;
-}
-
-.neon-button:hover {
-    background: var(--secondary-color);
-    box-shadow: 0 0 10px var(--secondary-color);
-}
-/* ===================================================== */
-/* == Tabs & Show More Education & Certs Section Styles == */
-/* ===================================================== */
-
-.edu-certs-tabs {
-    display: flex;
-    justify-content: center; /* Or start? Let's align with heading */
-    margin-bottom: 1.5rem; /* Align with h2 margin */
-    border-bottom: 1px solid var(--primary-color); /* Use a theme color */
-}
-
-.tab-button {
-    padding: 0.5rem 1rem; /* Match nav link padding */
-    margin-right: 0.5rem; /* Space between tabs */
-    cursor: pointer;
-    border: 1px solid transparent; /* Match nav link border */
-    border-bottom: none; /* Remove bottom part of border */
-    background-color: transparent;
-    font-size: 0.95rem; /* Adjust as needed */
-    color: var(--text-color); /* Use theme text color */
-    transition: all 0.3s; /* Match nav link transition */
-    font-family: 'Consolas', monospace; /* Ensure font */
-}
-
-.tab-button:hover {
-    color: var(--secondary-color);
-    border-color: var(--secondary-color); /* Match nav hover border */
-    background: rgba(52, 152, 219, 0.1); /* Subtle background like nav hover */
-}
-
-.tab-button.active {
-    color: var(--secondary-color);
-    font-weight: bold;
-    border-color: var(--secondary-color);
-    border-bottom-color: var(--dark-bg); /* Make bottom border blend with background */
-    background: rgba(52, 152, 219, 0.1); /* Keep subtle background for active */
-    position: relative;
-    top: 1px; /* Align visually with content area */
-}
-
-.tab-content {
-    display: none; /* Hide inactive tabs */
-    animation: fadeIn 0.5s ease; /* Optional fade-in */
-}
-
-.tab-content.active {
-    display: block; /* Show active tab */
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* List Item Styling (Compact) */
-.education-list,
-.certs-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.education-list li,
-.certs-list li.cert-item { /* Target cert items specifically here */
-    padding: 10px 0 12px 0;
-    margin-bottom: 0;
-    border-bottom: 1px solid var(--primary-color);
-}
-
-.education-list li:last-child,
-.certs-list li.cert-item:last-child {
-     border-bottom: none;
-}
-
-/* Consistent paragraph margins */
-.education-list li p,
-.certs-list li p {
-    margin: 0 0 4px 0; /* Keep tight spacing */
-    line-height: 1.4;
-}
-
-.item-title {
-    font-weight: bold;
-    font-size: 1.0rem; /* Keep slightly smaller */
-    color: var(--secondary-color); /* Highlight title with secondary color */
-}
-
-/* NEW: Style for education descriptions */
-.item-description {
-    font-size: 0.85rem;
-    color: #bdc3c7; /* Slightly dimmer text for description */
-    padding-left: 10px; /* Indent description slightly */
-    border-left: 2px solid var(--primary-color); /* Subtle left border */
-    margin-top: 8px;
-}
-.item-description p {
-    margin: 0 0 5px 0; /* Spacing between description lines */
-}
-.item-description strong {
-    color: var(--text-color); /* Make labels stand out slightly */
-}
-
-
-.item-credential {
-    font-size: 0.85rem;
-    color: #95a5a6;
-    margin-top: 3px;
-}
-
-.item-credential .selectable {
-    font-family: 'Consolas', monospace;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    padding: 2px 5px;
-    border-radius: 3px;
-    user-select: all;
-    cursor: text;
-    margin-left: 4px;
-}
-
-/* UPDATED: Make .certs-list a grid */
-.certs-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Create 2 columns */
-    gap: 0 1.5rem; /* Add gap between columns only (row-gap column-gap) */
-}
-
-/* Ensure list items don't have extra margin causing layout issues in grid */
-.certs-list li.cert-item {
-    margin-bottom: 0; /* Already set, but ensure */
-    padding-bottom: 12px; /* Ensure padding for spacing */
-}
-
-
-/* UPDATED: Hide 7th item onwards by default */
-#certs-content .cert-item:nth-child(n+7) {
-    display: none;
-}
-
-#certs-content.expanded .cert-item { /* Show all items when expanded */
-    display: block; /* Revert to default block display */
-}
-
-.show-more-certs {
-    display: inline-block; /* Initially hidden by inline style, shown by JS */
-    margin-top: 1rem;
-    padding: 6px 12px;
-    font-size: 0.9rem;
-    background-color: var(--primary-color); /* Match theme */
-    border: 1px solid var(--secondary-color); /* Use theme border */
-    color: var(--text-color);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-    font-family: 'Consolas', monospace; /* Ensure font */
-}
-
-.show-more-certs:hover {
-    background-color: var(--secondary-color); /* Highlight on hover */
-    border-color: var(--secondary-color);
-    color: var(--dark-bg);
-}
-/* Responsive: Revert to single column on smaller screens */
-@media (max-width: 600px) { /* Adjust breakpoint as needed */
-    .certs-list {
-        grid-template-columns: 1fr; /* Stack items in one column */
-        gap: 0; /* Remove grid gap */
-    }
-}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ahtasham Ilyas – AI, Machine Learning & Robotics Researcher based in Bremen, Germany.">
+  <title>Ahtasham Ilyas · AI · ML · Robotics</title>
+  <link rel="icon" type="image/x-icon" href="public/assets/Ahtasham.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/main.css">
+  <link rel="stylesheet" href="src/css/animations.css">
+  <link rel="stylesheet" href="src/css/sections.css">
+  <link rel="stylesheet" href="src/css/responsive.css">
 </head>
 <body>
-    <div class="loader-container">
-        <div class="matrix-bg" id="matrix"></div>
-        <h1 class="glitch-effect">INITIALIZING SYSTEM</h1>
-        <div class="terminal-loader">
-            <div class="terminal-header">
-                <div class="terminal-button red"></div>
-                <div class="terminal-button yellow"></div>
-                <div class="terminal-button green"></div>
-            </div>
-            <div class="loading-text">> Establishing secure connection...</div>
-            <div class="progress-bar">
-                <div class="progress"></div>
-            </div>
-            <div class="status-text" id="status">Loading modules... Please wait...</div>
-        </div>
+
+  <!-- ══ PRELOADER ══════════════════════════════════════════ -->
+  <div id="preloader">
+    <div class="pre-inner">
+      <svg class="pre-logo" viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="30" r="28" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="175" stroke-dashoffset="175"/>
+        <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Syne" font-weight="800" font-size="18" fill="var(--accent)">AI</text>
+      </svg>
+      <div class="pre-bar"><div class="pre-progress"></div></div>
+      <div class="pre-label">Initializing</div>
     </div>
-    <div id="particles-js"></div>
-    
-    <header class="contact-form">
-        <div class="terminal-window">
-            <div class="terminal-buttons">
-                <div class="terminal-button red"></div>
-                <div class="terminal-button yellow"></div>
-                <div class="terminal-button green"></div>
-            </div>
-            <div class="terminal-content">
-                <span style="color: #27c93f;">➜</span> <span style="color: #3498db;">~/portfolio</span>
-                Hey! I'm <span id="typed-text"></span><span class="cursor">_</span>
-            </div>
+  </div>
+
+  <!-- ══ CUSTOM CURSOR ══════════════════════════════════════ -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ══ NAVIGATION ═════════════════════════════════════════ -->
+  <nav id="nav">
+    <a href="#home" class="nav-logo">A<span>.</span>Ilyas</a>
+    <ul class="nav-links">
+      <li><a href="#about" data-nav>About</a></li>
+      <li><a href="#skills" data-nav>Skills</a></li>
+      <li><a href="#projects" data-nav>Projects</a></li>
+      <li><a href="#experience" data-nav>Experience</a></li>
+      <li><a href="#education" data-nav>Education</a></li>
+      <li><a href="#contact" data-nav>Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="public/assets/CV_AHTASHAM-ILYAS.pdf" download class="nav-cv">Download CV</a>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══ MOBILE MENU ════════════════════════════════════════ -->
+  <div id="mobileMenu">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ══ HERO ═══════════════════════════════════════════════ -->
+  <section id="home">
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- Floating particles -->
+    <div class="particle-field" id="particleField"></div>
+
+    <div class="hero-content">
+      <div class="hero-tag reveal-tag">
+        <span class="tag-dot"></span>
+        <span>Available for research collaboration · Bremen, Germany</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="hero-line" data-delay="0">Ahtasham</span>
+        <span class="hero-line accent" data-delay="120">Ilyas</span>
+      </h1>
+
+      <div class="hero-roles">
+        <span id="heroRole" class="role-text"></span>
+        <span class="role-cursor">|</span>
+      </div>
+
+      <p class="hero-bio">
+        MSc. Artificial Intelligence & Intelligent Systems at
+        <strong>University of Bremen</strong>. Researcher and engineer focused on
+        <strong>Deep Learning</strong>, <strong>Robotics</strong> and
+        <strong>Computer Vision</strong>.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">
+          <span>Explore Work</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+
+    <!-- 3D floating shapes (Three.js) -->
+    <canvas id="three-canvas"></canvas>
+
+    <div class="hero-scroll">
+      <div class="scroll-track"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ═══════════════════════════════════════════════ -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">About me</span>
+        <h2 class="section-title">Building intelligent<br>systems that work.</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>I'm a researcher and engineer who transitioned from full-stack development to the scientific frontier of <strong>AI, Machine Learning & Robotics</strong>. After graduating with First Class Honors in Computer Science, I relocated to <strong>Bremen, Germany</strong> to pursue an MSc at the University of Bremen.</p>
+          <p>My current research focuses on <strong>Advanced Machine Learning</strong>, <strong>Perception(6D Pose Estimation)</strong>, and <strong>Cognitive Robotics</strong> through the ACRAMbly master project. I believe the most important breakthroughs live at the intersection of software, hardware, and intelligence.</p>
+          <p>Previously I delivered 15+ production projects across Europe and the Middle East as a freelance developer, and held engineering roles at <strong>CandidateSide</strong> and <strong>Prime Missions (UK)</strong>.</p>
         </div>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
-            <li><a href="#skills"><i class="fas fa-brain"></i> Skills</a></li>
-            <li><a href="#experience"><i class="fas fa-history"></i> Experience</a></li>
-            <li><a href="#education-certs"><i class="fas fa-graduation-cap"></i> Education</a></li>
-            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
-        </ul>
-    </nav>
 
-    <main>
-        <a href="#services" id="servicesBtn" class="service_btn"></i>Services</a>
-        <div id="servicesModal" class="modal">
-            <div class="modal-content">
-                <div class="terminal-window">
-                    <div class="terminal-buttons">
-                        <div class="terminal-button red"></div>
-                        <div class="terminal-button yellow"></div>
-                        <div class="terminal-button green"></div>
-                    </div>
-                    <div class="modal-header">
-                        <h3>Available Services</h3>
-                        <span class="close">&times;</span>
-                    </div>
-                    <div class="services-grid">
-                        <div class="service-card" data-service="webDesign">
-                            <i class="fas fa-laptop-code"></i>
-                            <h4>Portfolio & Business Websites</h4>
-                            <p>Custom, responsive websites for professionals and small businesses</p>
-                        </div>
-                        <div class="service-card" data-service="aiSolutions">
-                            <i class="fas fa-brain"></i>
-                            <h4>AI & ML Solutions</h4>
-                            <p>Custom AI models and machine learning solutions</p>
-                        </div>
-                        <div class="service-card" data-service="automation">
-                            <i class="fas fa-robot"></i>
-                            <h4>Automation & Data</h4>
-                            <p>Process automation and data processing solutions</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="about-stats reveal" data-delay="200">
+          <div class="stat-card">
+            <div class="stat-num" data-count="15">0</div>
+            <div class="stat-suffix">+</div>
+            <div class="stat-lbl">Projects Delivered</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-count="10">0</div>
+            <div class="stat-suffix">+</div>
+            <div class="stat-lbl">Certifications</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-count="6">0</div>
+            <div class="stat-suffix">+</div>
+            <div class="stat-lbl">Years Coding</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-count="4">0</div>
+            <div class="stat-suffix">+</div>
+            <div class="stat-lbl">Companies Worked</div>
+          </div>
         </div>
-        
-        <!-- Service Details Modal -->
-        <div id="serviceDetailsModal" class="modal">
-            <div class="modal-content">
-                <div class="terminal-window">
-                    <div class="terminal-buttons">
-                        <div class="terminal-button red"></div>
-                        <div class="terminal-button yellow"></div>
-                        <div class="terminal-button green"></div>
-                    </div>
-                    <div class="modal-header">
-                        <h3 id="serviceTitle">Service Details</h3>
-                        <span class="close">&times;</span>
-                    </div>
-                    <div id="serviceDetails"></div>
-                    <button class="neon-button" id="bookServiceBtn">Book This Service</button>
-                </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SKILLS ══════════════════════════════════════════════ -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">Expertise</span>
+        <h2 class="section-title">What I work with</h2>
+      </div>
+
+      <div class="skills-grid">
+
+        <div class="skill-card reveal" data-delay="0">
+          <div class="skill-card-icon">🧠</div>
+          <h3>Machine Learning</h3>
+          <div class="skill-bars">
+            <div class="sbar-item">
+              <div class="sbar-label"><span>Python / NumPy / Pandas</span><span>90%</span></div>
+              <div class="sbar-track"><div class="sbar-fill" data-w="90"></div></div>
             </div>
+            <div class="sbar-item">
+              <div class="sbar-label"><span>PyTorch / TensorFlow</span><span>85%</span></div>
+              <div class="sbar-track"><div class="sbar-fill" data-w="85"></div></div>
+            </div>
+            <div class="sbar-item">
+              <div class="sbar-label"><span>Scikit-learn / XGBoost</span><span>80%</span></div>
+              <div class="sbar-track"><div class="sbar-fill" data-w="80"></div></div>
+            </div>
+          </div>
+          <div class="skill-tags">
+            <span>CNNs</span><span>Transformers</span><span>Hugging Face</span><span>BERT/GPT</span>
+          </div>
         </div>
-        
-        <!-- Booking Form Modal -->
-        <div id="bookingModal" class="modal">
-            <div class="modal-content">
-                <div class="terminal-window">
-                    <div class="terminal-buttons">
-                        <div class="terminal-button red"></div>
-                        <div class="terminal-button yellow"></div>
-                        <div class="terminal-button green"></div>
-                    </div>
-                    <div class="modal-header">
-                        <h3>Book Service</h3>
-                        <span class="close">&times;</span>
-                    </div>
-                    <form id="bookingForm" class="booking-form" action="https://formspree.io/f/xgveezyn" method="POST">
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Project Details:</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="neon-button">Submit Request</button>
-                    </form>
-                </div>
+
+        <div class="skill-card reveal" data-delay="100">
+          <div class="skill-card-icon">🤖</div>
+          <h3>Robotics & CV</h3>
+          <div class="skill-bars">
+            <div class="sbar-item">
+              <div class="sbar-label"><span>Computer Vision / OpenCV</span><span>80%</span></div>
+              <div class="sbar-track"><div class="sbar-fill" data-w="80"></div></div>
             </div>
+            <div class="sbar-item">
+              <div class="sbar-label"><span>Autonomous Systems</span><span>75%</span></div>
+              <div class="sbar-track"><div class="sbar-fill" data-w="75"></div></div>
+            </div>
+            <div class="sbar-item">
+              <div class="sbar-label"><span>Reinforcement Learning</span><span>70%</span></div>
+              <div class="sbar-track"><div class="sbar-fill" data-w="70"></div></div>
+            </div>
+          </div>
+          <div class="skill-tags">
+            <span>YOLO</span><span>ROS</span><span>Raspberry Pi</span><span>Arduino</span>
+          </div>
         </div>
-        <section id="projects">
-            <h2><i class="fas fa-code-branch"></i> Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Machine Learning Research</h3>
-                    <p>Research project on University's Research Papers</p>
-                    <div class="code-snippet">
-                        <span class="code-line"><span class="code-keyword">def</span> <span class="code-function">analyze_papers</span>(papers):</span>
-                        <span class="code-line">    results = ml_model.predict(papers)</span>
-                        <span class="code-line">    <span class="code-keyword">return</span> process_results(results)</span>
-                    </div>
-                    <div class="tech-stack">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">NLP</span>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <h3>Full Stack Web App</h3>
-                    <p>Responsive web application with RESTful API</p>
-                    <div class="code-snippet">
-                        <span class="code-line"><span class="code-keyword">const</span> api = <span class="code-keyword">async</span> () => {</span>
-                        <span class="code-line">    <span class="code-keyword">const</span> response = <span class="code-keyword">await</span> fetch(<span class="code-string">'/api/data'</span>)</span>
-                        <span class="code-line">    <span class="code-keyword">return</span> response.json()</span>
-                        <span class="code-line">}</span>
-                    </div>
-                    <div class="tech-stack">
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">MongoDB</span>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <h3>Auto listening & AI Reviewing.</h3>
-                    <p>Gathering jobs and Reviewing by GPT Models @<a href="https://candidateside.com" style="color: white;">Candidate Side</a></p>
-                    <div class="code-snippet">
-                        <span class="code-line"><span class="code-keyword">def</span> <span class="code-function">fetch_Review_jobs</span>(Job_Board):</span>
-                        <span class="code-line">    jobs = auto_listen(Jobs_Board)</span>
-                        <span class="code-line">    review = gpt_model.review(job)</span>
-                        <span class="code-line">    <span class="code-keyword">return</span> process_reviews(reviews)</span>
-                    </div>
-                    <div class="tech-stack">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Selenium</span>
-                        <span class="skill-tag">Huggingface</span>
-                        <span class="skill-tag">NLP</span>
-                    </div>
-                </div>
+
+        <div class="skill-card reveal" data-delay="200">
+          <div class="skill-card-icon">💻</div>
+          <h3>Full-Stack / Dev</h3>
+          <div class="skill-bars">
+            <div class="sbar-item">
+              <div class="sbar-label"><span>HTML / CSS / JavaScript</span><span>90%</span></div>
+              <div class="sbar-track"><div class="sbar-fill" data-w="90"></div></div>
             </div>
-        </section>
-
-        <section id="skills">
-            <h2><i class="fas fa-laptop-code"></i> Technical Skills</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Frontend & Frameworks</h3>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">HTML, CSS, JavaScript</span>
-                            <span class="skill-percentage">90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">Laravel, Bootstrap, Flutter, WordPress</span>
-                            <span class="skill-percentage">65%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">Figma,Excel, MS-Office, Google suite</span>
-                            <span class="skill-percentage">80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Backend & Languages</h3>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">Python, PHP, Java, MySQL</span>
-                            <span class="skill-percentage">85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name"> Node.js</span>
-                            <span class="skill-percentage">80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">Git, RESTful APIs, AWS, Docker</span>
-                            <span class="skill-percentage">75%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 75%;"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="sbar-item">
+              <div class="sbar-label"><span>Laravel / PHP / Node.js</span><span>80%</span></div>
+              <div class="sbar-track"><div class="sbar-fill" data-w="80"></div></div>
             </div>
-        </section>
-
-        <section id="experience">
-            <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>CandidateSide Recruiting</h3>
-                        <p class="role">Python & Data Specialist</p>
-                        <p class="duration">Jun 2024 – Dec 2024</p>
-                        <ul>
-                            <li>Efficiently manage large volumes of data with 99.9% accuracy</li>
-                            <li>Implementation of web scraping solutions using Python and Selenium</li>
-                            <li>Analysis of complex data sets using GPT techniques</li>
-                        </ul>
-                        <div class="skills">
-                            <span>Google Suit</span>
-                            <span>Python</span>
-                            <span>LLM</span>
-                            <span>Excel</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>Prime Missions (UK)</h3>
-                        <p class="role">Full-Stack Web Developer</p>
-                        <p class="duration">Nov 2023 – Jun 2024</p>
-                        <ul>
-                            <li>Develop responsive, user-friendly web interfaces</li>
-                            <li>Design and develop server-side components and RESTful APIs</li>
-                            <li>Work with cloud platforms and implement DevOps practices</li>
-                        </ul>
-                        <div class="skills">
-                            <span>Node.js</span>
-                            <span>AWS</span>
-                            <span>Docker</span>
-                            <span>CI/CD</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>Rising Codes</h3>
-                        <p class="role">Laravel Developer</p>
-                        <p class="duration">July 2023 – Aug 2023</p>
-                        <ul>
-                            <li>Design and develop web applications using Laravel PHP framework</li>
-                            <li>Bug fixing, performance optimization, and API development</li>
-                        </ul>
-                        <div class="skills">
-                            <span>PHP</span>
-                            <span>Laravel</span>
-                            <span>RESTful API</span>
-                            <span>MVC</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>Special Communication Org (SCO)</h3>
-                        <p class="role">Telecommunication Intern</p>
-                        <p class="duration">July 2023 – Aug 2023</p>
-                        <ul>
-                            <li>Managed and maintained critical telecom infrastructure</li>
-                            <li>Ensured reliability of telecommunications systems</li>
-                        </ul>
-                        <div class="skills">
-                            <span>GPON</span>
-                            <span>PSTN</span>
-                            <span>GSM</span>
-                            <span>Fiber Optics</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>Climaxcode</h3>
-                        <p class="role">Full-Stack Developer Intern</p>
-                        <p class="duration">Aug 2022 – Oct 2022</p>
-                        <ul>
-                            <li>Fixed bugs and wrote unit tests for web applications</li>
-                            <li>Automated PDF report generation, improving efficiency by 120x</li>
-                        </ul>
-                        <div class="skills">
-                            <span>WordPress</span>
-                            <span>PHP</span>
-                            <span>MySQL</span>
-                            <span>Shopify</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>Freelance Developer</h3>
-                        <p class="role">Independent Contractor</p>
-                        <p class="duration">Sep 2018 – Present</p>
-                        <ul>
-                            <li>Developed chatbots, ML tasks, websites, and mobile apps</li>
-                            <li>Worked with various technologies and frameworks</li>
-                        </ul>
-                        <div class="skills">
-                            <span>Flutter</span>
-                            <span>Python</span>
-                            <span>Azure</span>
-                            <span>Firebase</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="sbar-item">
+              <div class="sbar-label"><span>Flutter / Mobile</span><span>65%</span></div>
+              <div class="sbar-track"><div class="sbar-fill" data-w="65"></div></div>
             </div>
-            <div class="blur-overlay" id="blurOverlay"></div>
-            <button class="show-more-btn" id="showMoreBtn">Show More</button>
-        </section>
+          </div>
+          <div class="skill-tags">
+            <span>React</span><span>MongoDB</span><span>MySQL</span><span>REST API</span>
+          </div>
+        </div>
 
-        <section id="education-certs">
-            <h2><i class="fas fa-user-graduate"></i> Education & Certifications</h2>
-        
-            <div class="edu-certs-tabs">
-                <button class="tab-button active" data-target="education-content">Formal Education</button>
-                <button class="tab-button" data-target="certs-content">Certifications & Courses</button>
+        <div class="skill-card reveal" data-delay="300">
+          <div class="skill-card-icon">☁️</div>
+          <h3>Cloud & DevOps</h3>
+          <div class="skill-bars">
+            <div class="sbar-item">
+              <div class="sbar-label"><span>Git / GitHub</span><span>85%</span></div>
+              <div class="sbar-track"><div class="sbar-fill" data-w="85"></div></div>
             </div>
-        
-            <div class="edu-certs-content-area">
-        
-                <div id="education-content" class="tab-content active">
-                    <ul class="education-list">
-                        <li>
-                            <p class="item-title">Master of Science, Artificial Intelligence and Intelligent Systems</p>
-                            <p class="item-details">
-                                <span style="color: var(--accent-color); font-weight: bold; margin-bottom: 5px;">University of Bremen</span> | <span class="item-duration">Oct 2024 - Present</span>
-                            </p>
-                            <div class="item-description"> <p><strong>First Semester Courses:</strong> F-AMAI (Advanced Methods of AI), F-AML (Advanced Machine Learning), F-IIS (Integrated Intelligent Systems), F-ATE (AI Algorithms: Theory and Engineering)</p>
-                                <p><strong>Second Semester Focus:</strong> Specialization in Machine Learning and Cognitive Robotics, Master Project: ACRAMbly, Autonomous and Intelligent Systems</p>
-                            </div>
-                        </li>
-                        <li>
-                            <p class="item-title">Bachelor of Science - BS, Computer Science</p>
-                            <p class="item-details">
-                                <span style="color: var(--accent-color); font-weight: bold; margin-bottom: 5px;">Mirpur University of Science & Technology (MUST)</span> | <span class="item-duration">Sep 2019 - Dec 2023</span>
-                            </p>
-                             <div class="item-description"> <p>Graduated with First Class Honors and CGPA of 3.00/4.00. (70.85% Marks) </p> <p>Ranked 5th/86th, Capstone Project, Earned Dean's List recognition for academic excellence.</p><p> Completed a research project on University’s Research Papers. (GitHub | Thesis) </p> </div>
-                        </li>
-                    </ul>
-                </div>
-        
-                <div id="certs-content" class="tab-content">
-                    <ul class="certs-list">
-                        <li class="cert-item">
-                            <p class="item-title">Data Scientist Associate</p>
-                            <p class="item-details">
-                                <span class="item-issuer">DataCamp</span> | <span class="item-date">Issued: Mar 2025</span>
-                            </p>
-                            <p class="item-credential">
-                                Credential ID: <a href="https://www.datacamp.com/certificate/DSA0016892666406" target="_blank" class="selectable">DSA0016892666406</a>
-                            </p>
-                        </li>
-                        <li class="cert-item">
-                            <p class="item-title">Python Data Associate</p>
-                            <p class="item-details">
-                                <span class="item-issuer">DataCamp</span> | <span class="item-date">Issued: Mar 2025</span>
-                            </p>
-                            <p class="item-credential">
-                                Credential ID: <a href="https://www.datacamp.com/certificate/PDA0014426478528" target="_blank" class="selectable">PDA0014426478528</a>
-                            </p>
-                        </li>
-                        <li class="cert-item">
-                            <p class="item-title">Deep Learning with PyTorch : Image Segmentation</p>
-                            <p class="item-details">
-                                <span class="item-issuer">Coursera</span> | <span class="item-date">Issued: June, 2024</span>
-                            </p>
-                            <p class="item-credential">
-                                Credential ID: <a href="https://coursera.org/verify/6VNJ693QEB4Z" target="_blank" class="selectable">6VNJ693QEB4Z</a>
-                            </p>
-                        </li>
-                        <li class="cert-item">
-                            <p class="item-title">Programming for Everybody (Getting Started with Python)</p>
-                            <p class="item-details">
-                                <span class="item-issuer">University of Michigan (via Coursera)</span> | <span class="item-date">Completed: May 2024</span>
-                            </p>
-                            <p class="item-credential">
-                                Credential ID: <a href="https://coursera.org/verify/MLKLDTPN8RZ9" target="_blank" class="selectable">MLKLDTPN8RZ9</a>
-                            </p>
-                        </li>
-                        <li class="cert-item">
-                            <p class="item-title">Generative AI with Large Language Models</p>
-                            <p class="item-details">
-                                <span class="item-issuer">AWS, DeepLearning.AI (via Coursera)</span> | <span class="item-date">Completed: Dec 2023</span>
-                            </p>
-                            <p class="item-credential">
-                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/verify/ZLDVN62CV5DD" target="_blank" class="selectable">ZLDVN62CV5DD</a>
-                            </p>
-                        </li>
-                        <li class="cert-item">
-                            <p class="item-title">The Raspberry Pi Platform and Python Programming for the Raspberry Pi</p>
-                            <p class="item-details">
-                                <span class="item-issuer">University of California, Irvine (via Coursera)</span> | <span class="item-date">Issue:Dec 2023</span>
-                            </p>
-                            <p class="item-credential">
-                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/verify/B2AR59L7YKTA" target="_blank" class="selectable">B2AR59L7YKTA</a>
-                            </p>
-                        </li>
-                        <li class="cert-item">
-                            <p class="item-title">Specialization in Machine Learning</p>
-                            <p class="item-details">
-                                <span class="item-issuer">DeepLearning.AI (via Coursera)</span> | <span class="item-date">Completed: February, 2023</span>
-                            </p>
-                            <p class="item-credential">
-                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/specialization/N5P4CZQ9XJUD" target="_blank" class="selectable">N5P4CZQ9XJUD</a>
-                            </p>
-                        </li>
-                        <li class="cert-item">
-                            <p class="item-title">Advanced Learning Algorithms</p>
-                            <p class="item-details">
-                                <span class="item-issuer">DeepLearning.AI (via Coursera)</span> | <span class="item-date">Issued: July, 2023</span>
-                            </p>
-                            <p class="item-credential">
-                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/verify/2QEN9V64F2GQ" target="_blank" class="selectable">2QEN9V64F2GQ</a>
-                            </p>
-                        </li>
-                        <li class="cert-item">
-                            <p class="item-title">Supervised Machine Learning: Regression and Classification</p>
-                            <p class="item-details">
-                                <span class="item-issuer">DeepLearning.AI (via Coursera)</span> | <span class="item-date">Completed: May 2023</span>
-                            </p>
-                            <p class="item-credential">
-                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/certificate/UTJ7E8KCB55B" target="_blank" class="selectable">UTJ7E8KCB55B</a>
-                            </p>
-                        </li>
-                        <li class="cert-item">
-                            <p class="item-title">Microsoft Azure for Data Engineering</p>
-                            <p class="item-details">
-                                <span class="item-issuer">Microsoft</span> | <span class="item-date">Completed: Mar 2023</span>
-                            </p>
-                            <p class="item-credential">
-                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/certificate/DCHPJULT5G9C" target="_blank" class="selectable">DCHPJULT5G9C</a>
-                            </p>
-                        </li>
-                        <li class="cert-item">
-                            <p class="item-title">Python for Data Science, AI & Development</p>
-                            <p class="item-details">
-                                <span class="item-issuer">IBM</span> | <span class="item-date">Completed: Mar 2023</span>
-                            </p>
-                            <p class="item-credential">
-                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/certificate/PAG6QNHAK38P" target="_blank" class="selectable">PAG6QNHAK38P</a>
-                            </p>
-                        </li>
-                        <li class="cert-item">
-                            <p class="item-title">What is Data Science?</p>
-                            <p class="item-details">
-                                <span class="item-issuer">IBM</span> | <span class="item-date">Completed: Mar 2023</span>
-                            </p>
-                            <p class="item-credential">
-                                Credential ID: <a href="https://www.coursera.org/account/accomplishments/verify/2QEN9V64F2GQ" target="_blank" class="selectable">2QEN9V64F2GQ</a>
-                            </p>
-                        </li>
-                        </ul>
-                    <button class="show-more-certs" style="display: none;">Show More</button>
-                </div>
-            </div><script>document.addEventListener('DOMContentLoaded', () => {
-                const tabContainer = document.querySelector('.edu-certs-tabs');
-                const contentArea = document.querySelector('.edu-certs-content-area');
-                const certsContent = document.getElementById('certs-content');
-                const certsList = certsContent?.querySelector('.certs-list');
-                const showMoreButton = certsContent?.querySelector('.show-more-certs');
-                const certItems = certsList?.querySelectorAll('.cert-item');
-            
-                // --- UPDATE THIS VALUE ---
-                const INITIAL_VISIBLE_CERTS = 6; // Number of certificates to show initially (2 columns x 3 rows)
-            
-                // --- Tab Switching Logic (Remains the same) ---
-                if (tabContainer && contentArea) {
-                    tabContainer.addEventListener('click', (event) => {
-                        if (event.target.classList.contains('tab-button')) {
-                            const targetId = event.target.dataset.target;
-                            const targetContent = document.getElementById(targetId);
-            
-                            tabContainer.querySelectorAll('.tab-button').forEach(btn => {
-                                btn.classList.remove('active');
-                            });
-                            event.target.classList.add('active');
-            
-                            contentArea.querySelectorAll('.tab-content').forEach(content => {
-                                content.classList.remove('active');
-                            });
-                            if (targetContent) {
-                                targetContent.classList.add('active');
-                            }
-                        }
-                    });
-                }
-            
-                // --- Show More/Less Logic (Updates button text based on new constant) ---
-                if (certsList && showMoreButton && certItems && certItems.length > INITIAL_VISIBLE_CERTS) {
-                    showMoreButton.style.display = 'inline-block';
-                    // Update button text calculation
-                    showMoreButton.textContent = `Show More (${certItems.length - INITIAL_VISIBLE_CERTS})`;
-            
-                    showMoreButton.addEventListener('click', () => {
-                        certsContent.classList.toggle('expanded');
-            
-                        if (certsContent.classList.contains('expanded')) {
-                            showMoreButton.textContent = 'Show Less';
-                        } else {
-                            // Update button text calculation
-                            showMoreButton.textContent = `Show More (${certItems.length - INITIAL_VISIBLE_CERTS})`;
-                        }
-                    });
-                } else if (showMoreButton) {
-                     showMoreButton.style.display = 'none';
-                }
-            
-            });</script> </section>
-        <!-- <section id="education">    <h2><i class="fas fa</section> -->
-        <section id="contact">
-            <h2><i class="fas fa-envelope"></i> Contact Me</h2>
-            <form class="contact-form" action="https://formspree.io/f/xgveezyn" method="POST">
-                <div class="form-group">
-                    <h3 style="text-align: center;">Have a question or want to work together?</h3>
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Your Email">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" placeholder="Your Message"></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-            </form>
-        </section>
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Connect With Me</h3>
-                    <div class="social-links">
-                        <a href="https://github.com/ahtashamilyas" class="social-link" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/ahtasham-ilyas-ba4ba119b/" class="social-link" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://twitter.com" class="social-link" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </div>&nbsp;&nbsp;&nbsp;
-                    <div class="connect-actions">
-                        <a href="/CV_AHTASHAM-ILYAS.pdf" class="cv-download" download>
-                            <i class="fas fa-download"></i> Download CV
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <nav class="footer-nav">
-                        <a href="#home">Home</a>
-                        <a href="#projects">Projects</a>
-                        <a href="#skills">Skills</a>
-                        <a href="#experience">Experience</a>
-                        <a href="#contact">Contact</a>
-                    </nav>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> ahtashamilyas2000@gmail.com</p>
-                        <p><i class="fas fa-location-dot"></i> Bremen, Germany</p>
-                    </div>
-                </div>
+            <div class="sbar-item">
+              <div class="sbar-label"><span>AWS / Azure</span><span>75%</span></div>
+              <div class="sbar-track"><div class="sbar-fill" data-w="75"></div></div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 Ahtasham Ilyas. All rights reserved.</p>
-                <button class="back-to-top" aria-label="Back to top">
-                    <i class="fas fa-arrow-up"></i>
-                </button>
+            <div class="sbar-item">
+              <div class="sbar-label"><span>Docker / CI-CD</span><span>70%</span></div>
+              <div class="sbar-track"><div class="sbar-fill" data-w="70"></div></div>
             </div>
-        </footer>
+          </div>
+          <div class="skill-tags">
+            <span>Firebase</span><span>Selenium</span><span>Figma</span><span>Linux</span>
+          </div>
+        </div>
 
+      </div>
+    </div>
+  </section>
 
+  <!-- ══ PROJECTS ════════════════════════════════════════════ -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">Work</span>
+        <h2 class="section-title">Featured Projects</h2>
+      </div>
 
-<script>
-    const matrix = document.getElementById('matrix');
-        const width = window.innerWidth;
-        
-        for (let i = 0; i < 50; i++) {
-            const line = document.createElement('div');
-            line.className = 'matrix-line';
-            line.style.left = Math.random() * width + 'px';
-            line.style.height = Math.random() * 100 + 20 + '%';
-            line.style.animationDuration = Math.random() * 3 + 2 + 's';
-            line.style.animationDelay = Math.random() * 2 + 's';
-            matrix.appendChild(line);
-        }
+      <div class="projects-list">
 
-        // Update status messages
-        const statusMessages = [
-            "Loading modules... Please wait...",
-            "Initializing components...",
-            "Loading dependencies...",
-            "Configuring environment...",
-            "Starting services...",
-            "Almost there..."
-        ];
+        <div class="proj-row reveal" data-delay="0">
+          <div class="proj-index">01</div>
+          <div class="proj-body">
+            <h3>Machine Learning Research – University Papers</h3>
+            <p>Research project analyzing university research papers using ML pipelines. NLP-based classification and topic extraction on academic datasets.</p>
+            <div class="proj-code">
+              <span class="c-kw">def</span> <span class="c-fn">analyze_papers</span>(papers):
+              <br>&nbsp;&nbsp;results = ml_model.predict(papers)
+              <br>&nbsp;&nbsp;<span class="c-kw">return</span> process_results(results)
+            </div>
+            <div class="proj-tags"><span>Python</span><span>TensorFlow</span><span>NLP</span></div>
+          </div>
+          <a href="#" class="proj-arrow">→</a>
+        </div>
 
-        let messageIndex = 0;
-        const statusElement = document.getElementById('status');
+        <div class="proj-row reveal" data-delay="80">
+          <div class="proj-index">02</div>
+          <div class="proj-body">
+            <h3>Auto-listening & AI Job Reviewing – CandidateSide</h3>
+            <p>Automated job-board scraper with GPT-powered review engine. Live at <a href="https://candidateside.com" target="_blank">candidateside.com</a>. Processes thousands of postings daily with 99.9% data accuracy.</p>
+            <div class="proj-code">
+              <span class="c-kw">def</span> <span class="c-fn">fetch_review_jobs</span>(board):
+              <br>&nbsp;&nbsp;jobs = auto_listen(board)
+              <br>&nbsp;&nbsp;review = gpt_model.review(jobs)
+              <br>&nbsp;&nbsp;<span class="c-kw">return</span> process_reviews(review)
+            </div>
+            <div class="proj-tags"><span>Python</span><span>Selenium</span><span>HuggingFace</span><span>LLM</span></div>
+          </div>
+          <a href="https://candidateside.com" target="_blank" class="proj-arrow">→</a>
+        </div>
 
-        setInterval(() => {
-            statusElement.textContent = statusMessages[messageIndex];
-            messageIndex = (messageIndex + 1) % statusMessages.length;
-        }, 2000);
+        <div class="proj-row reveal" data-delay="160">
+          <div class="proj-index">03</div>
+          <div class="proj-body">
+            <h3>Full-Stack RESTful Web Application</h3>
+            <p>Responsive web application with a Node.js backend, RESTful API design, and cloud-native deployment on AWS using Docker and CI/CD pipelines.</p>
+            <div class="proj-code">
+              <span class="c-kw">const</span> getData = <span class="c-kw">async</span> () => {
+              <br>&nbsp;&nbsp;<span class="c-kw">const</span> res = <span class="c-kw">await</span> fetch(<span class="c-str">'/api/data'</span>)
+              <br>&nbsp;&nbsp;<span class="c-kw">return</span> res.json()
+              <br>}
+            </div>
+            <div class="proj-tags"><span>React</span><span>Node.js</span><span>MongoDB</span><span>AWS</span></div>
+          </div>
+          <a href="#" class="proj-arrow">→</a>
+        </div>
 
-        // Hide loader when page is fully loaded
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.querySelector('.loader-container').style.display = 'none';
-            }, 3000);
-        });
-        const typed = new Typed('#typed-text', {
-        strings: ['Ahtasham Ilyas','Full Stack Developer', 'Machine Learning Engineer',],
-        typeSpeed: 60,
-        backSpeed: 50,
-        loop: true
-    });
+        <div class="proj-row reveal" data-delay="240">
+          <div class="proj-index">04</div>
+          <div class="proj-body">
+            <h3>ACRAMbly – Cognitive Robotics Master Project</h3>
+            <p>Master project at University of Bremen. Building autonomous and intelligent robotic system combining perception, planning and action in the Autonomous & Intelligent Systems track.</p>
+            <div class="proj-code">
+              <span class="c-kw">class</span> <span class="c-fn">ACRAMbly</span>(RobotAgent):
+              <br>&nbsp;&nbsp;<span class="c-kw">def</span> <span class="c-fn">perceive</span>(self, env):
+              <br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-kw">return</span> self.model.infer(env)
+            </div>
+            <div class="proj-tags"><span>Python</span><span>ROS</span><span>RL</span><span>Computer Vision</span></div>
+          </div>
+          <a href="#" class="proj-arrow">→</a>
+        </div>
 
-    particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json', function() {
-        console.log('Particles loaded');
-    });
-    document.querySelector('.back-to-top').addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-document.addEventListener('DOMContentLoaded', function() {
-    // Specifically target work experience timeline items
-    const workExperienceSection = document.querySelector('#experience .timeline');
-    const timelineItems = workExperienceSection.querySelectorAll('.timeline-item');
-    const blurOverlay = document.getElementById('blurOverlay');
-    const showMoreBtn = document.getElementById('showMoreBtn');
-    let isExpanded = false;
+        <div class="proj-row reveal" data-delay="320">
+          <div class="proj-index">05</div>
+          <div class="proj-body">
+            <h3>Deep Learning – Image Segmentation Pipeline</h3>
+            <p>PyTorch-based image segmentation pipeline using U-Net architecture for pixel-level classification. Certified by Coursera (6VNJ693QEB4Z).</p>
+            <div class="proj-code">
+              model = <span class="c-fn">UNet</span>(in_channels=3, classes=10)
+              <br>pred = model(image_tensor)
+              <br>mask = pred.argmax(dim=1)
+            </div>
+            <div class="proj-tags"><span>PyTorch</span><span>U-Net</span><span>Segmentation</span></div>
+          </div>
+          <a href="https://coursera.org/verify/6VNJ693QEB4Z" target="_blank" class="proj-arrow">→</a>
+        </div>
 
-    // Initially hide all work experience items except the first two
-    for (let i = 2; i < timelineItems.length; i++) {
-        timelineItems[i].classList.add('hidden');
-    }
+      </div>
+    </div>
+  </section>
 
-    showMoreBtn.addEventListener('click', function() {
-        isExpanded = !isExpanded;
-        if (isExpanded) {
-            timelineItems.forEach(item => item.classList.remove('hidden'));
-            if (blurOverlay) {
-                blurOverlay.style.display = 'none';
-            }
-            this.textContent = 'Show Less';
-        } else {
-            for (let i = 2; i < timelineItems.length; i++) {
-                timelineItems[i].classList.add('hidden');
-            }
-            if (blurOverlay) {
-                blurOverlay.style.display = 'block';
-            }
-            this.textContent = 'Show More';
-        }
-    });
-});
-</script>
-<script>
-    // Service details data
-    const servicesData = {
-    webDesign: {
-        title: "Personal Portfolio & Small Business Websites",
-        description: `Custom website development services for individuals and small businesses:
-            • Professional portfolio websites
-            • Small business landing pages
-            • Responsive layouts
-            • Mobile-friendly design
-            • WordPress integration
-            • SEO optimization
-            • Hosting setup`,
-        pricing: "Starting from $100",
-        duration: "1-3 weeks"
-    },
-    aiSolutions: {
-        title: "AI & ML Solutions",
-        description: `Specialized artificial intelligence and machine learning services:
-            • Custom ML models
-            • Custom GPT Models
-            • Recommendation systems
-            • Natural Language Processing
-            • Deep learning implementation
-            • AI model optimization
-            • Data analysis`,
-        pricing: "Starting from $250",
-        duration: "2-4 weeks"
-    },
-    automation: {
-        title: "Automation & Data Solutions",
-        description: `Automation and data processing services:
-            • Web scraping solutions
-            • Data entry automation
-            • Form automation
-            • Process automation
-            • Excel/Sheets automation
-            • Basic chatbot development
-            • Data visualization`,
-        pricing: "Starting from $50",
-        duration: "1-2 weeks"
-    }
-};
-    
-    // Wait for DOM to be fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get modal elements
-        const servicesModal = document.getElementById('servicesModal');
-        const serviceDetailsModal = document.getElementById('serviceDetailsModal');
-        const bookingModal = document.getElementById('bookingModal');
-        const serviceTitle = document.getElementById('serviceTitle');
-        const serviceDetailsElement = document.getElementById('serviceDetails');
-        const bookServiceBtn = document.getElementById('bookServiceBtn');
-        const bookingForm = document.getElementById('bookingForm');
-        const servicesBtn = document.getElementById('servicesBtn');
-        const closeButtons = document.getElementsByClassName('close');
-    
-        // Services button click handler
-        servicesBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            servicesModal.style.display = 'block';
-        });
-    
-        // Service card click handler
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const service = card.dataset.service;
-                const details = servicesData[service];
-                
-                if (details) {
-                    serviceTitle.textContent = details.title;
-                    serviceDetailsElement.innerHTML = `
-                        <div class="service-details">
-                            <p>${details.description}</p>
-                            <p><strong>Pricing:</strong> ${details.pricing}</p>
-                            <p><strong>Duration:</strong> ${details.duration}</p>
-                        </div>
-                    `;
-                    
-                    servicesModal.style.display = 'none';
-                    serviceDetailsModal.style.display = 'block';
-                }
-            });
-        });
-    
-        // Book service button click handler
-        bookServiceBtn.addEventListener('click', () => {
-            serviceDetailsModal.style.display = 'none';
-            bookingModal.style.display = 'block';
-        });
-    
-        // Booking form submit handler
-        // bookingForm.addEventListener('submit', (e) => {
-        //     e.preventDefault();
-            
-        //     // Here you would typically send the form data to your server
-        //     alert('Thank you for your booking request! We will contact you soon.');
-            
-        //     // Reset form and close modal
-        //     bookingForm.reset();
-        //     bookingModal.style.display = 'none';
-        // });
-    
-        // Close button handlers
-        Array.from(closeButtons).forEach(button => {
-            button.addEventListener('click', () => {
-                servicesModal.style.display = 'none';
-                serviceDetailsModal.style.display = 'none';
-                bookingModal.style.display = 'none';
-            });
-        });
-    
-        // Close modals when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === servicesModal) servicesModal.style.display = 'none';
-            if (e.target === serviceDetailsModal) serviceDetailsModal.style.display = 'none';
-            if (e.target === bookingModal) bookingModal.style.display = 'none';
-        });
-    });
-    </script>
-    </body>
+  <!-- ══ EXPERIENCE ══════════════════════════════════════════ -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">Timeline</span>
+        <h2 class="section-title">Work Experience</h2>
+      </div>
+
+      <div class="timeline">
+
+        <div class="tl-item reveal" data-delay="0">
+          <div class="tl-marker">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span class="tl-date">Oct 2025 – Present</span>
+              <span class="tl-badge">Latest</span>
+            </div>
+            <h3>AICOR: Institute of Artificial Intelligence</h3>
+            <p class="tl-role">Student Research Assistant</p>
+            <ul>
+              <li>Robot Perception: Designing computer vision algorithms for object detection, instance segmentation, and multi-object 6D pose estimation from RGB-only input.</li>
+              <li>Geometrical Deep Learning: Leveraging graph-based and manifold learning approaches to model structured task representations, improve generalization, and enable robots to adapt in novel environments.</li>
+              <li>Scene Understanding & Cognitive Integration: Supporting mental/physics-based simulation pipelines that bridge visual perception with reasoning for robust and adaptive robotic behavior.</li>
+            </ul>
+            <div class="tl-skills">
+              <span>PyTorch</span><span>Graph Neural Networks</span><span>ROS2</span><span>SE(3)-equivariant policies</span><span>CUDA</span><span>Equiformer</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal" data-delay="0">
+          <div class="tl-marker">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span class="tl-date">Jun 2024 – Dec 2024</span>
+            </div>
+            <h3>CandidateSide Recruiting</h3>
+            <p class="tl-role">Python & Data Specialist</p>
+            <ul>
+              <li>Managed large volumes of data with 99.9% accuracy using automated pipelines</li>
+              <li>Implemented web scraping solutions with Python and Selenium for job board monitoring</li>
+              <li>Analysed complex datasets using GPT-based LLM techniques for insights extraction</li>
+            </ul>
+            <div class="tl-skills">
+              <span>Python</span><span>Selenium</span><span>LLM</span><span>Excel</span><span>Google Suite</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal" data-delay="100">
+          <div class="tl-marker">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span class="tl-date">Nov 2023 – Jun 2024</span>
+            </div>
+            <h3>Prime Missions (UK)</h3>
+            <p class="tl-role">Full-Stack Web Developer</p>
+            <ul>
+              <li>Developed responsive, user-friendly web interfaces with modern JS frameworks</li>
+              <li>Designed and built server-side components and RESTful APIs</li>
+              <li>Worked with cloud platforms (AWS) and implemented DevOps / CI-CD practices</li>
+            </ul>
+            <div class="tl-skills">
+              <span>Node.js</span><span>AWS</span><span>Docker</span><span>CI/CD</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal" data-delay="200">
+          <div class="tl-marker">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span class="tl-date">Jul 2023 – Aug 2023</span>
+            </div>
+            <h3>Rising Codes</h3>
+            <p class="tl-role">Laravel Developer</p>
+            <ul>
+              <li>Designed and developed web applications using the Laravel PHP MVC framework</li>
+              <li>Bug fixing, performance optimisation, and API development</li>
+            </ul>
+            <div class="tl-skills">
+              <span>PHP</span><span>Laravel</span><span>RESTful API</span><span>MVC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal" data-delay="300">
+          <div class="tl-marker">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span class="tl-date">Jul 2023 – Aug 2023</span>
+            </div>
+            <h3>Special Communication Organisation (SCO)</h3>
+            <p class="tl-role">Telecommunication Intern</p>
+            <ul>
+              <li>Managed and maintained critical telecom infrastructure</li>
+              <li>Ensured reliability of GPON, PSTN and GSM telecommunications systems</li>
+            </ul>
+            <div class="tl-skills">
+              <span>GPON</span><span>PSTN</span><span>GSM</span><span>Fiber Optics</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal" data-delay="400">
+          <div class="tl-marker">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-meta">
+              <span class="tl-date">Sep 2018 – Present</span>
+            </div>
+            <h3>Freelance Developer</h3>
+            <p class="tl-role">Independent Contractor</p>
+            <ul>
+              <li>Developed chatbots, ML tasks, websites and mobile apps for 15+ clients</li>
+              <li>Worked with Flutter, Python, Azure, Firebase across diverse project scopes</li>
+              <li>Built Shopify stores and integrated e-commerce automation solutions</li>
+            </ul>
+            <div class="tl-skills">
+              <span>Flutter</span><span>Python</span><span>Azure</span><span>Firebase</span><span>Shopify</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ EDUCATION & CERTS ═══════════════════════════════════ -->
+  <section id="education">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">Academic Background</span>
+        <h2 class="section-title">Education &amp; Certifications</h2>
+      </div>
+
+      <!-- Tab Switcher -->
+      <div class="edu-tabs reveal">
+        <button class="edu-tab active" data-tab="formal">Formal Education</button>
+        <button class="edu-tab" data-tab="certs">Certifications &amp; Courses</button>
+      </div>
+
+      <!-- Formal Education -->
+      <div class="edu-panel active" id="tab-formal">
+        <div class="edu-card reveal">
+          <div class="edu-left">
+            <div class="edu-year">2024<br><span>– Present</span></div>
+          </div>
+          <div class="edu-right">
+            <span class="edu-badge">Current</span>
+            <h3>Master of Science – Artificial Intelligence and Intelligent Systems</h3>
+            <p class="edu-inst">University of Bremen · Bremen, Germany</p>
+            <div class="edu-desc">
+              <p><strong>Semester 1:</strong> F-AMAI (Advanced Methods of AI), F-AML (Advanced Machine Learning), F-IIS (Integrated Intelligent Systems), F-ATE (AI Algorithms: Theory & Engineering)</p>
+              <p><strong>Semester 2:</strong> Specialisation in Machine Learning & Cognitive Robotics — Master Project: <em>ACRAMbly</em>, Autonomous & Intelligent Systems track.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu-card reveal" data-delay="100">
+          <div class="edu-left">
+            <div class="edu-year">2019<br><span>– 2023</span></div>
+          </div>
+          <div class="edu-right">
+            <span class="edu-badge honor">First Class Honours</span>
+            <h3>Bachelor of Science – Computer Science</h3>
+            <p class="edu-inst">Mirpur University of Science & Technology (MUST) · Pakistan</p>
+            <div class="edu-desc">
+              <p>CGPA: <strong>3.0 / 4.0</strong> &nbsp;|&nbsp; Marks: <strong>70.85%</strong> &nbsp;|&nbsp; Rank: <strong>5th / 86</strong></p>
+              <p>Earned Dean's List recognition for academic excellence. Capstone research project on university research papers (GitHub | Thesis). Completed with First Class Honours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications -->
+      <div class="edu-panel" id="tab-certs">
+        <div class="certs-grid" id="certsGrid">
+
+          <a class="cert-card reveal" href="https://www.datacamp.com/certificate/AEDS0010489229515" target="_blank">
+            <span class="cert-issuer">DataCamp · Apr 2025</span>
+            <h4>AI Engineer for Data Scientists Associate</h4>
+            <span class="cert-id">AEDS0010489229515</span>
+          </a>
+
+          <a class="cert-card reveal" data-delay="60" href="https://www.datacamp.com/certificate/PDA0014426478528" target="_blank">
+            <span class="cert-issuer">DataCamp · Mar 2025</span>
+            <h4>Python Data Associate</h4>
+            <span class="cert-id">PDA0014426478528</span>
+          </a>
+
+          <a class="cert-card reveal" data-delay="120" href="https://coursera.org/verify/6VNJ693QEB4Z" target="_blank">
+            <span class="cert-issuer">Coursera · Jun 2024</span>
+            <h4>Deep Learning with PyTorch: Image Segmentation</h4>
+            <span class="cert-id">6VNJ693QEB4Z</span>
+          </a>
+
+          <a class="cert-card reveal" data-delay="180" href="https://coursera.org/verify/MLKLDTPN8RZ9" target="_blank">
+            <span class="cert-issuer">University of Michigan · May 2024</span>
+            <h4>Programming for Everybody (Python)</h4>
+            <span class="cert-id">MLKLDTPN8RZ9</span>
+          </a>
+
+          <a class="cert-card reveal" data-delay="240" href="https://www.coursera.org/account/accomplishments/verify/ZLDVN62CV5DD" target="_blank">
+            <span class="cert-issuer">AWS / DeepLearning.AI · Dec 2023</span>
+            <h4>Generative AI with Large Language Models</h4>
+            <span class="cert-id">ZLDVN62CV5DD</span>
+          </a>
+
+          <a class="cert-card reveal" data-delay="300" href="https://www.coursera.org/account/accomplishments/specialization/N5P4CZQ9XJUD" target="_blank">
+            <span class="cert-issuer">DeepLearning.AI · Feb 2023</span>
+            <h4>Specialisation in Machine Learning</h4>
+            <span class="cert-id">N5P4CZQ9XJUD</span>
+          </a>
+          
+          <a class="cert-card reveal cert-hidden" href="https://www.coursera.org/account/accomplishments/verify/B2AR59L7YKTA" target="_blank">
+            <span class="cert-issuer">UC Irvine · Dec 2023</span>
+            <h4>Raspberry Pi Platform & Python Programming</h4>
+            <span class="cert-id">B2AR59L7YKTA</span>
+          </a>
+
+          <a class="cert-card reveal cert-hidden" href="https://www.coursera.org/account/accomplishments/verify/2QEN9V64F2GQ" target="_blank">
+            <span class="cert-issuer">DeepLearning.AI · Jul 2023</span>
+            <h4>Advanced Learning Algorithms</h4>
+            <span class="cert-id">2QEN9V64F2GQ</span>
+          </a>
+
+          <a class="cert-card reveal cert-hidden" href="https://www.coursera.org/account/accomplishments/certificate/UTJ7E8KCB55B" target="_blank">
+            <span class="cert-issuer">DeepLearning.AI · May 2023</span>
+            <h4>Supervised ML: Regression & Classification</h4>
+            <span class="cert-id">UTJ7E8KCB55B</span>
+          </a>
+
+          <a class="cert-card reveal cert-hidden" href="https://www.coursera.org/account/accomplishments/certificate/DCHPJULT5G9C" target="_blank">
+            <span class="cert-issuer">Microsoft · Mar 2023</span>
+            <h4>Microsoft Azure for Data Engineering</h4>
+            <span class="cert-id">DCHPJULT5G9C</span>
+          </a>
+
+          <a class="cert-card reveal cert-hidden" href="https://www.coursera.org/account/accomplishments/certificate/PAG6QNHAK38P" target="_blank">
+            <span class="cert-issuer">IBM · Mar 2023</span>
+            <h4>Python for Data Science, AI & Development</h4>
+            <span class="cert-id">PAG6QNHAK38P</span>
+          </a>
+
+          <a class="cert-card reveal cert-hidden" href="https://www.coursera.org/account/accomplishments/verify/2QEN9V64F2GQ" target="_blank">
+            <span class="cert-issuer">IBM · Mar 2023</span>
+            <h4>What is Data Science?</h4>
+            <span class="cert-id">2QEN9V64F2GQ</span>
+          </a>
+
+          <a class="cert-card reveal cert-hidden" href="https://www.datacamp.com/certificate/DSA0016892666406" target="_blank">
+            <span class="cert-issuer">DataCamp · Mar 2025</span>
+            <h4>Data Scientist Associate</h4>
+            <span class="cert-id">DSA0016892666406</span>
+          </a>
+
+        </div>
+        <button class="show-more-btn" id="showMoreCerts">Show More Certificates <span>+</span></button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SERVICES FLOATING BTN ══════════════════════════════ -->
+  <button class="fab" id="fabServices" title="Services">
+    <span>✦</span>
+    <span class="fab-label">Services</span>
+  </button>
+
+  <!-- ══ SERVICES MODAL ═════════════════════════════════════ -->
+  <div class="modal-overlay" id="servicesModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeServices">✕</button>
+      <h3 class="modal-title">Available Services</h3>
+      <div class="services-grid">
+        <div class="svc-card" data-svc="web">
+          <div class="svc-icon">🌐</div>
+          <h4>Portfolio & Business Sites</h4>
+          <p>Responsive, modern websites for professionals and small businesses</p>
+          <span class="svc-price">From $100 · 1–3 weeks</span>
+        </div>
+        <div class="svc-card" data-svc="ai">
+          <div class="svc-icon">🧠</div>
+          <h4>AI & ML Solutions</h4>
+          <p>Custom ML models, NLP, recommendation systems, data analysis</p>
+          <span class="svc-price">From $250 · 2–4 weeks</span>
+        </div>
+        <div class="svc-card" data-svc="auto">
+          <div class="svc-icon">⚙️</div>
+          <h4>Automation & Data</h4>
+          <p>Web scraping, process automation, chatbots, data visualisation</p>
+          <span class="svc-price">From $50 · 1–2 weeks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CONTACT ═════════════════════════════════════════════ -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">Let's connect</span>
+        <h2 class="section-title">Have an idea?<br>Let's build it.</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <p>I'm open to research collaborations, AI/ML projects, and scientific conversations. The fastest way to reach me:</p>
+          <div class="contact-links">
+            <a href="mailto:ahtasham.ilyas@uni-bremen.de" class="contact-link">
+              <span class="cl-icon">✉</span>
+              <span>ahtasham-ilyas@uni-bremen.de</span>
+            </a>
+            <a href="https://www.linkedin.com/in/ahtasham-ilyas-ba4ba119b/" target="_blank" class="contact-link">
+              <span class="cl-icon">in</span>
+              <span>linkedin.com/in/ahtasham-ilyas</span>
+            </a>
+            <a href="https://github.com/ahtashamilyas" target="_blank" class="contact-link">
+              <span class="cl-icon">⌥</span>
+              <span>github.com/ahtashamilyas</span>
+            </a>
+            <a class="contact-link no-link">
+              <span class="cl-icon">📍</span>
+              <span>Bremen, Germany</span>
+            </a>
+          </div>
+          <div class="social-row">
+            <a href="https://github.com/ahtashamilyas" target="_blank" class="soc-btn" title="GitHub">GH</a>
+            <a href="https://www.linkedin.com/in/ahtasham-ilyas-ba4ba119b/" target="_blank" class="soc-btn" title="LinkedIn">Li</a>
+            <a href="public/assets/CV_AHTASHAM-ILYAS.pdf" download class="soc-btn cv-btn">↓ CV</a>
+          </div>
+        </div>
+
+        <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/xgveezyn" method="POST" data-delay="200">
+          <div class="form-row">
+            <div class="field-wrap">
+              <input type="text" name="name" id="cName" placeholder=" " required>
+              <label for="cName">Full Name</label>
+            </div>
+            <div class="field-wrap">
+              <input type="email" name="email" id="cEmail" placeholder=" " required>
+              <label for="cEmail">Email Address</label>
+            </div>
+          </div>
+          <div class="field-wrap">
+            <input type="text" name="subject" id="cSubject" placeholder=" ">
+            <label for="cSubject">Subject</label>
+          </div>
+          <div class="field-wrap">
+            <textarea name="message" id="cMsg" rows="5" placeholder=" " required></textarea>
+            <label for="cMsg">Message</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">
+            <span id="submitLabel">Send Message</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <p class="form-note" id="formNote"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══════════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">A<span>.</span>Ilyas</span>
+        <p>AI · Machine Learning · Robotics<br>Bremen, Germany</p>
+      </div>
+      <nav class="footer-nav">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="footer-copy">
+        <p>© 2024 Ahtasham Ilyas. All rights reserved.</p>
+        <a href="#home" class="back-top">↑ Top</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="src/js/cursor.js"></script>
+  <script src="src/js/preloader.js"></script>
+  <script src="src/js/nav.js"></script>
+  <script src="src/js/hero.js"></script>
+  <script src="src/js/three-scene.js"></script>
+  <script src="src/js/reveal.js"></script>
+  <script src="src/js/skills.js"></script>
+  <script src="src/js/tabs.js"></script>
+  <script src="src/js/modal.js"></script>
+  <script src="src/js/contact.js"></script>
+  <script src="src/js/counters.js"></script>
+</body>
 </html>

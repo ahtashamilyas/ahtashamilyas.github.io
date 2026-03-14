@@ -1,0 +1,21 @@
+{
+  "name": "ahtasham-ilyas-portfolio",
+  "version": "2.0.0",
+  "description": "AI · ML · Robotics Portfolio — Ahtasham Ilyas",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve . -p 3000 -s",
+    "dev": "live-server --port=3000 --open=index.html",
+    "preview": "npx serve . -p 3000"
+  },
+  "devDependencies": {
+    "serve": "^14.2.3",
+    "live-server": "^1.2.2"
+  },
+  "keywords": ["portfolio", "AI", "machine-learning", "robotics", "three.js"],
+  "author": "Ahtasham Ilyas",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
