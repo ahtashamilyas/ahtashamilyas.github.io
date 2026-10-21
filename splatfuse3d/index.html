@@ -21,17 +21,13 @@
           Part Extraction
         </h1>
         <p class="authors">
-          Author Name<sup>1</sup>, Author Name<sup>2</sup>, Author Name<sup>1,2</sup>
+          Ahtasham Ilyas<sup>1,2</sup>, Max Gandyra<sup>1,2</sup>, Prof. Michael Beetz<sup>1,2</sup>
         </p>
         <p class="affiliations">
-          <sup>1</sup>[Maintainer placeholder: Affiliation 1, e.g., University of
-          Bremen]<br />
-          <sup>2</sup>[Maintainer placeholder: Affiliation 2, e.g., Institute of
-          Artificial Intelligence, Bremen]
+          <sup>1</sup>University of Bremen<br />
+          <sup>2</sup>Institute of Artificial Intelligence, Bremen
         </p>
-        <p class="publication">
-          [Maintainer placeholder: Conference/Journal status, year]
-        </p>
+        <p class="publication">Master Thesis · Defence: 12 April 2027</p>
         <p class="tldr">
           <strong>TL;DR:</strong> SplatFuse3D combines geometric verification with
           Gaussian segmentation to support cleaner object and part extraction in
@@ -65,10 +61,7 @@
       <section aria-labelledby="overview-title">
         <h2 id="overview-title">Overview / Abstract</h2>
         <p>
-          This page presents the core idea of SplatFuse3D with maintainers-editable
-          placeholders for finalized author details, publication links, and media.
-          The method focuses on geometry-verified segmentation over 3D Gaussian
-          scene representations for object-level and part-level extraction.
+          This thesis investigates geometry-verified supervision for hierarchical object and part segmentation in 3D Gaussian Splatting scenes reconstructed from multi-view RGB images. The proposed approach combines a planar-based Gaussian representation, unbiased depth rendering, surface-normal estimation, and single-view and multi-view geometric consistency with multi-scale 2D segmentation masks. Scale-conditioned affinity features, scale-gated representations, and contrastive learning are used to support segmentation at different physical scales. The central contribution is a geometry-based verification mechanism that reprojects 3D points between camera views using rendered depth and evaluates mask agreement while accounting for visibility and depth consistency. The resulting confidence scores are used to weight or reject unreliable cross-view training pairs. The learned representations are then used to segment individual objects and their constituent parts, with per-object mesh extraction investigated through masked depth fusion. The method will be evaluated against existing segmentation baselines using segmentation accuracy, boundary leakage, cross-view consistency, and mesh-quality metrics, alongside ablation studies to measure the effect of geometry verification.
         </p>
       </section>
 
@@ -133,11 +126,15 @@
 
       <section aria-labelledby="citation-title">
         <h2 id="citation-title">Citation</h2>
-        <pre><code>@misc{splatfuse3d,
+        <pre><code>@mastersthesis{ilyas2027splatfuse3d,
   title = {SplatFuse3D: Geometry-Verified 3D Gaussian Segmentation for Object and Part Extraction},
-  author = {[Maintainer placeholder]},
-  year = {[Maintainer placeholder]},
-  note = {[Maintainer placeholder: publication details]},
+  author = {Ahtasham Ilyas and Max Gandyra and Michael Beetz},
+  school = {University of Bremen},
+  institution = {Institute of Artificial Intelligence, Bremen},
+  type = {Master Thesis},
+  month = {apr},
+  year = {2027},
+  note = {Defence: 12 April 2027},
   url = {https://github.com/ahtashamilyas/splatfuse3d}
 }</code></pre>
       </section>
