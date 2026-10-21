@@ -22,8 +22,8 @@ WEBSITE.
 ## Scope clarification
 
 This license applies only to newly authored source files inside `splatfuse3d/`
-for this project webpage (for example: `index.html`, `style.css`, and
-`script.js`, plus this folder's documentation files).
+for this project webpage (for example: `index.html` and `style.css`, plus this
+folder's documentation files).
 
 This license does **not** alter or replace licensing terms for:
 
