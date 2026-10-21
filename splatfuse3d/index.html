@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SplatFuse3D | Geometry-Verified 3D Gaussian Segmentation</title>
+    <meta
+      name="description"
+      content="SplatFuse3D: Geometry-Verified 3D Gaussian Segmentation for Object and Part Extraction."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="sf3d-page">
+    <a class="sf3d-skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="sf3d-hero" id="top">
+      <nav class="sf3d-nav" aria-label="Primary">
+        <p class="sf3d-brand">SplatFuse3D</p>
+        <button
+          class="sf3d-nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="sf3d-nav-links"
+        >
+          Menu
+        </button>
+        <ul class="sf3d-nav-links" id="sf3d-nav-links">
+          <li><a href="#abstract">Abstract</a></li>
+          <li><a href="#method">Method</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#usage">Usage</a></li>
+          <li><a href="#citation">Citation</a></li>
+        </ul>
+      </nav>
+
+      <section class="sf3d-hero-content" aria-labelledby="page-title">
+        <p class="sf3d-kicker">3D Vision · Gaussian Splatting · Segmentation</p>
+        <h1 id="page-title">
+          SplatFuse3D: Geometry-Verified 3D Gaussian Segmentation for Object and
+          Part Extraction
+        </h1>
+        <p>
+          A project page for communicating method design, reproducibility steps,
+          and visual results for geometry-aware object and part extraction in 3D
+          Gaussian scenes.
+        </p>
+        <div class="sf3d-actions">
+          <a class="sf3d-button sf3d-button-primary" href="https://github.com/ahtashamilyas/splatfuse3d">Source Repository</a>
+          <a class="sf3d-button" href="#usage">Get Started</a>
+        </div>
+      </section>
+    </header>
+
+    <main id="main-content">
+      <section class="sf3d-section" id="abstract" aria-labelledby="abstract-title">
+        <h2 id="abstract-title">Abstract</h2>
+        <p>
+          SplatFuse3D studies geometry-verified segmentation in 3D Gaussian
+          representations, targeting robust extraction of whole objects and
+          fine-grained parts. This page intentionally uses maintainers-editable
+          placeholders for figures, metrics, and media until curated assets are
+          ready for publication.
+        </p>
+      </section>
+
+      <section class="sf3d-section" id="method" aria-labelledby="method-title">
+        <h2 id="method-title">Key Contributions &amp; Method Overview</h2>
+        <div class="sf3d-grid">
+          <article class="sf3d-card">
+            <h3>Geometry Verification</h3>
+            <p>
+              Integrates geometric consistency checks to filter ambiguous
+              segmentation assignments in sparse and dense scene regions.
+            </p>
+          </article>
+          <article class="sf3d-card">
+            <h3>Object + Part Extraction</h3>
+            <p>
+              Supports both full object masks and part-level extraction for
+              downstream analysis and compositional scene editing tasks.
+            </p>
+          </article>
+          <article class="sf3d-card">
+            <h3>Reproducible Workflow</h3>
+            <p>
+              Aligns code artifacts, experiment structure, and citation details
+              so updates can be tracked and reproduced by maintainers.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="sf3d-section" id="results" aria-labelledby="results-title">
+        <h2 id="results-title">Visual Demos &amp; Result Placeholders</h2>
+        <p>
+          The panels below are placeholders for upcoming project visuals. They do
+          not represent final quantitative or qualitative claims.
+        </p>
+        <div class="sf3d-grid sf3d-grid-results">
+          <figure class="sf3d-placeholder" role="group" aria-labelledby="placeholder-1-label">
+            <svg viewBox="0 0 320 180" role="img" aria-label="Placeholder for method pipeline illustration">
+              <rect x="8" y="8" width="304" height="164" rx="12"></rect>
+              <circle cx="76" cy="90" r="26"></circle>
+              <rect x="122" y="76" width="124" height="28" rx="8"></rect>
+              <path d="M58 132 L258 132" />
+            </svg>
+            <figcaption id="placeholder-1-label">Pipeline figure placeholder</figcaption>
+          </figure>
+          <figure class="sf3d-placeholder" role="group" aria-labelledby="placeholder-2-label">
+            <svg viewBox="0 0 320 180" role="img" aria-label="Placeholder for qualitative segmentation examples">
+              <rect x="8" y="8" width="304" height="164" rx="12"></rect>
+              <rect x="36" y="36" width="88" height="108" rx="10"></rect>
+              <rect x="136" y="36" width="88" height="108" rx="10"></rect>
+              <rect x="236" y="36" width="48" height="108" rx="10"></rect>
+            </svg>
+            <figcaption id="placeholder-2-label">Qualitative results placeholder</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="sf3d-section" id="usage" aria-labelledby="usage-title">
+        <h2 id="usage-title">Installation / Usage</h2>
+        <p>
+          For the latest setup instructions, supported environments, and
+          dependencies, use the source repository documentation:
+        </p>
+        <p>
+          <a href="https://github.com/ahtashamilyas/splatfuse3d">github.com/ahtashamilyas/splatfuse3d</a>
+        </p>
+        <pre><code>git clone https://github.com/ahtashamilyas/splatfuse3d.git
+cd splatfuse3d
+# Follow the repository README for current setup and run instructions.</code></pre>
+      </section>
+
+      <section class="sf3d-section" id="citation" aria-labelledby="citation-title">
+        <h2 id="citation-title">Citation</h2>
+        <p>
+          Update this entry once the maintainers publish the canonical citation.
+        </p>
+        <pre><code>@misc{splatfuse3d,
+  title = {SplatFuse3D: Geometry-Verified 3D Gaussian Segmentation for Object and Part Extraction},
+  howpublished = {\url{https://github.com/ahtashamilyas/splatfuse3d}},
+  note = {Maintainer-editable placeholder citation}
+}</code></pre>
+      </section>
+    </main>
+
+    <footer class="sf3d-footer">
+      <p>
+        <span id="sf3d-year"></span> SplatFuse3D Website Source.
+        <a href="LICENSE.md">Website License</a> ·
+        <a href="NOTICE.md">Attribution Notice</a>
+      </p>
+      <p>
+        Institutional attribution and authorization statements should be
+        confirmed by project maintainers before publication.
+      </p>
+      <p><a href="#top">Back to top</a></p>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

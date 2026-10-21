@@ -1,0 +1,257 @@
+:root {
+  color-scheme: dark;
+  --sf3d-bg: #070b16;
+  --sf3d-surface: #111a2e;
+  --sf3d-surface-soft: #1a2743;
+  --sf3d-text: #eef2ff;
+  --sf3d-muted: #b8c2dd;
+  --sf3d-accent: #7c8dff;
+  --sf3d-accent-strong: #4f63ff;
+  --sf3d-ring: #c7d2ff;
+}
+
+.sf3d-page {
+  margin: 0;
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--sf3d-text);
+  background: radial-gradient(circle at 20% 10%, #1a2a5f 0%, var(--sf3d-bg) 45%);
+  line-height: 1.65;
+}
+
+.sf3d-page * {
+  box-sizing: border-box;
+}
+
+.sf3d-page a {
+  color: var(--sf3d-accent);
+}
+
+.sf3d-page a:hover {
+  color: #a5b1ff;
+}
+
+.sf3d-page a:focus-visible,
+.sf3d-page button:focus-visible {
+  outline: 2px solid var(--sf3d-ring);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.sf3d-skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  z-index: 20;
+  background: #000;
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  transform: translateY(-150%);
+}
+
+.sf3d-skip-link:focus {
+  transform: translateY(0);
+}
+
+.sf3d-hero {
+  padding: 1.25rem 1.25rem 3rem;
+}
+
+.sf3d-nav {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sf3d-brand {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.sf3d-nav-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid #5b6ba8;
+  color: var(--sf3d-text);
+  padding: 0.5rem 0.75rem;
+}
+
+.sf3d-nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+}
+
+.sf3d-nav-links a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.sf3d-hero-content,
+.sf3d-section,
+.sf3d-footer {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.sf3d-hero-content {
+  padding: 4.5rem 0 1rem;
+}
+
+.sf3d-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sf3d-muted);
+  font-weight: 700;
+  margin-bottom: 0.65rem;
+}
+
+.sf3d-hero-content h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 3.1rem);
+  line-height: 1.2;
+}
+
+.sf3d-hero-content p {
+  max-width: 65ch;
+  color: var(--sf3d-muted);
+}
+
+.sf3d-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.sf3d-button {
+  display: inline-block;
+  text-decoration: none;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #7284c9;
+  color: var(--sf3d-text) !important;
+  font-weight: 700;
+}
+
+.sf3d-button-primary {
+  background: linear-gradient(135deg, var(--sf3d-accent-strong), var(--sf3d-accent));
+  border-color: transparent;
+}
+
+.sf3d-section {
+  padding: 0.5rem 1.25rem 2.25rem;
+}
+
+.sf3d-section h2 {
+  font-size: clamp(1.45rem, 2.3vw, 2rem);
+  margin-bottom: 0.5rem;
+}
+
+.sf3d-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.sf3d-card,
+.sf3d-placeholder {
+  margin: 0;
+  border: 1px solid #2d3f73;
+  background: linear-gradient(180deg, var(--sf3d-surface), var(--sf3d-surface-soft));
+  border-radius: 0.8rem;
+  padding: 1rem;
+}
+
+.sf3d-card h3 {
+  margin-top: 0.2rem;
+  margin-bottom: 0.45rem;
+}
+
+.sf3d-card p,
+.sf3d-section p,
+.sf3d-footer p,
+.sf3d-placeholder figcaption {
+  color: var(--sf3d-muted);
+}
+
+.sf3d-grid-results {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.sf3d-placeholder svg {
+  width: 100%;
+  height: auto;
+}
+
+.sf3d-placeholder svg rect,
+.sf3d-placeholder svg circle,
+.sf3d-placeholder svg path {
+  fill: none;
+  stroke: #9fb0ff;
+  stroke-width: 3;
+}
+
+.sf3d-page pre {
+  background: #081129;
+  border: 1px solid #283c75;
+  border-radius: 0.6rem;
+  padding: 0.9rem;
+  overflow-x: auto;
+}
+
+.sf3d-page code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.sf3d-footer {
+  padding: 1rem 1.25rem 2.5rem;
+}
+
+@media (max-width: 860px) {
+  .sf3d-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sf3d-grid-results {
+    grid-template-columns: 1fr;
+  }
+
+  .sf3d-nav-toggle {
+    display: inline-block;
+  }
+
+  .sf3d-nav-links {
+    position: absolute;
+    right: 1rem;
+    top: 3.4rem;
+    z-index: 10;
+    flex-direction: column;
+    width: min(230px, calc(100vw - 2rem));
+    padding: 0.8rem;
+    border: 1px solid #314579;
+    border-radius: 0.7rem;
+    background: #0b1228;
+    display: none;
+  }
+
+  .sf3d-nav-links.is-open {
+    display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
