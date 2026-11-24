@@ -4,8 +4,8 @@ Drop short, muted demo recordings in this folder using the names below. Use `<so
 
 | Project | WebM | MP4 |
 | --- | --- | --- |
-| SplatFuse3D | `splatfuse3d.webm` | `public/assets/VLM.mp4` |
-| VLM Action Acquisition | `vlm-action-acquisition.webm` | `public/assets/splatfuse.mp4` |
+| SplatFuse3D | `splatfuse3d.webm` | `public/assets/splatfuse.mp4` |
+| VLM Action Acquisition | `vlm-action-acquisition.webm` | `public/assets/VLM.mp4` |
 | CandidateSide | `candidateside.webm` | `candidateside.mp4` |
 
 ACRAMbly uses the animated 6D pose estimation GIF directly in its 16:9 media container. The video cards use `research-demo-poster.svg` while their recordings are unavailable or before playback begins.
