@@ -409,12 +409,13 @@
   background: #dce1ea;
 }
 .project-media video,
-.project-media video > img {
+.project-media > img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+.project-media > img { position: absolute; inset: 0; }
 .project-media-label {
   position: absolute;
   left: 16px;
