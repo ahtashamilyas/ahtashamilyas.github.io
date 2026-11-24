@@ -8,4 +8,4 @@ Drop short, muted demo recordings in this folder using the names below. Use `<so
 | VLM Action Acquisition | `vlm-action-acquisition.webm` | `public/assets/VLM.mp4` |
 | CandidateSide | `candidateside.webm` | `candidateside.mp4` |
 
-ACRAMbly uses the animated 6D pose estimation GIF directly in its 16:9 media container. The video cards use `research-demo-poster.svg` while their recordings are unavailable or before playback begins.
+ACRAMbly uses the animated 6D pose estimation GIF directly in its 16:9 media container. CandidateSide uses `candidate-side-poster.svg` as a project-specific interface illustration; the other video cards use `research-demo-poster.svg` while their recordings are unavailable or before playback begins.
