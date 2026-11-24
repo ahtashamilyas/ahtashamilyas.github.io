@@ -29,11 +29,12 @@
 
 /* ── RESET ───────────────────────────────────────── */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; font-size:15px; }
+html { scroll-behavior:smooth; font-size:clamp(14px, calc(13.3px + 0.18vw), 18px); }
 body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
+  font-size:clamp(14px, calc(12px + 0.25vw), 18px);
   line-height: 1.7;
   overflow-x: hidden;
   cursor: none;
@@ -58,15 +59,16 @@ body::before {
 
 /* ── CONTAINER ───────────────────────────────────── */
 .container {
-  max-width: 1160px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 clamp(24px, 3.125vw, 48px);
 }
 
 /* ── BUTTONS ─────────────────────────────────────── */
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--font-body); font-size: 13px; letter-spacing: 0.3px;
+  font-family: var(--font-body); font-size: clamp(12px, 0.65vw, 15px); letter-spacing: 0.3px;
   border: none; border-radius: 100px; padding: 12px 26px;
   transition: background 0.25s, color 0.25s, transform 0.2s var(--ease), box-shadow 0.25s;
   cursor: none; position: relative; overflow: hidden;
@@ -98,14 +100,14 @@ body::before {
 .btn-submit { margin-top: 8px; }
 
 /* ── SECTION SHARED ──────────────────────────────── */
-section { padding: 100px 0; position: relative; }
+section { padding: clamp(72px, 6.25vw, 112px) 0; position: relative; }
 section:nth-child(even) { background: var(--surface); }
 #home { padding: 0; background: var(--bg); }
 #contact { background: var(--ink); }
 
-.section-header { margin-bottom: 60px; }
+.section-header { margin-bottom: clamp(40px, 4vw, 64px); }
 .section-eyebrow {
-  font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+  font-size: clamp(10px, 0.6vw, 13px); letter-spacing: 2.5px; text-transform: uppercase;
   color: var(--accent); display: flex; align-items: center; gap: 10px;
   margin-bottom: 14px;
 }
@@ -113,7 +115,7 @@ section:nth-child(even) { background: var(--surface); }
   content: ''; display: block; width: 22px; height: 1.5px; background: var(--accent);
 }
 .section-title {
-  font-family: var(--font-head); font-size: clamp(30px, 4vw, 52px);
+  font-family: var(--font-head); font-size: clamp(32px, 3.2vw, 72px);
   font-weight: 800; line-height: 1.08; letter-spacing: -1.5px;
   color: var(--ink);
 }
@@ -152,7 +154,7 @@ section:nth-child(even) { background: var(--surface); }
   transition: width 0.4s var(--ease);
 }
 .pre-label {
-  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  font-size: clamp(10px, 0.58vw, 13px); letter-spacing: 2px; text-transform: uppercase;
   color: var(--ink3);
 }
 

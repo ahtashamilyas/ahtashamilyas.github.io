@@ -3,8 +3,11 @@
   const nums = document.querySelectorAll('[data-count]');
   if (!nums.length) return;
 
+  const started = new WeakSet();
+
   function animCount(el, target) {
-    let start = 0;
+    if (started.has(el)) return;
+    started.add(el);
     const dur = 1400;
     const startTime = performance.now();
 
@@ -19,15 +22,27 @@
     requestAnimationFrame(tick);
   }
 
+  function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return rect.bottom > 0 && rect.top < window.innerHeight;
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    nums.forEach(el => animCount(el, Number(el.dataset.count)));
+    return;
+  }
+
   const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const target = parseInt(e.target.dataset.count, 10);
-        animCount(e.target, target);
-        obs.unobserve(e.target);
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animCount(entry.target, Number(entry.target.dataset.count));
+        obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.6 });
+  }, { threshold: 0.1, rootMargin: '0px 0px -5% 0px' });
 
-  nums.forEach(n => obs.observe(n));
+  nums.forEach(el => {
+    if (isInViewport(el)) animCount(el, Number(el.dataset.count));
+    else obs.observe(el);
+  });
 })();

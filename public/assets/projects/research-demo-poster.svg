@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title description">
+  <title id="title">Research demo placeholder</title>
+  <desc id="description">Abstract blue and orange geometry on a warm neutral background, ready for a project recording.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5f4f0"/>
+      <stop offset="1" stop-color="#dfe5f0"/>
+    </linearGradient>
+    <linearGradient id="shape" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a56db" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#d95f2b" stop-opacity=".75"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#1b1a17" stroke-opacity=".08"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="720" fill="url(#background)"/>
+  <rect width="1280" height="720" fill="url(#grid)"/>
+  <g fill="none" stroke="url(#shape)" stroke-width="3">
+    <circle cx="640" cy="320" r="168" stroke-dasharray="4 14"/>
+    <circle cx="640" cy="320" r="112" stroke-opacity=".45"/>
+    <path d="m640 170 130 75v150l-130 75-130-75V245z" stroke-opacity=".85"/>
+    <path d="M510 245 640 320l130-75M640 320v150"/>
+  </g>
+  <g fill="#1a56db">
+    <circle cx="640" cy="170" r="7"/>
+    <circle cx="770" cy="245" r="7"/>
+    <circle cx="770" cy="395" r="7"/>
+    <circle cx="640" cy="470" r="7"/>
+    <circle cx="510" cy="395" r="7"/>
+    <circle cx="510" cy="245" r="7"/>
+  </g>
+  <rect x="48" y="48" width="5" height="54" rx="2.5" fill="#1a56db"/>
+  <text x="72" y="70" fill="#1b1a17" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="3">RESEARCH DEMO</text>
+  <text x="72" y="96" fill="#4a4744" font-family="Arial, sans-serif" font-size="13" letter-spacing="1.5">ADD A PROJECT RECORDING TO /ASSETS/PROJECTS</text>
+  <circle cx="640" cy="320" r="32" fill="#f5f4f0" stroke="#1a56db" stroke-width="2"/>
+  <path d="m634 306 22 14-22 14z" fill="#1a56db"/>
+</svg>

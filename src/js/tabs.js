@@ -1,44 +1,40 @@
-/* tabs.js — education / certifications tab switcher */
+/* tabs.js — certification filters and expand/collapse */
 (function() {
-  const tabs   = document.querySelectorAll('.edu-tab');
-  const panels = document.querySelectorAll('.edu-panel');
+  const cards = Array.from(document.querySelectorAll('.cert-card'));
+  const filters = document.querySelectorAll('[data-cert-filter]');
+  const showMore = document.getElementById('showMoreCerts');
+  if (!cards.length) return;
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.tab;
+  let activeFilter = 'all';
+  let showAll = false;
 
-      tabs.forEach(t => t.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
+  function updateCards() {
+    cards.forEach((card, index) => {
+      const matchesFilter = activeFilter === 'all' || card.dataset.category === activeFilter;
+      card.hidden = !matchesFilter || (!showAll && index >= 6);
+    });
+  }
 
-      tab.classList.add('active');
-      const panel = document.getElementById('tab-' + target);
-      if (panel) panel.classList.add('active');
+  filters.forEach(filter => {
+    filter.addEventListener('click', () => {
+      activeFilter = filter.dataset.certFilter;
+      filters.forEach(item => {
+        const isActive = item === filter;
+        item.classList.toggle('active', isActive);
+        item.setAttribute('aria-pressed', String(isActive));
+      });
+      updateCards();
     });
   });
 
-  // Show more certificates
-  const showMoreBtn = document.getElementById('showMoreCerts');
-  if (showMoreBtn) {
-    showMoreBtn.addEventListener('click', () => {
-      const hidden = document.querySelectorAll('.cert-hidden');
-      const expanded = showMoreBtn.dataset.expanded === 'true';
-
-      if (!expanded) {
-        hidden.forEach(c => {
-          c.classList.remove('cert-hidden');
-          c.classList.add('visible');
-        });
-        showMoreBtn.textContent = 'Show Less −';
-        showMoreBtn.dataset.expanded = 'true';
-      } else {
-        hidden.forEach(c => c.classList.add('cert-hidden'));
-        // re-add original hidden ones
-        document.querySelectorAll('.cert-card:nth-child(n+7)').forEach(c => {
-          c.classList.add('cert-hidden');
-        });
-        showMoreBtn.textContent = 'Show More Certificates +';
-        showMoreBtn.dataset.expanded = 'false';
-      }
+  if (showMore) {
+    showMore.addEventListener('click', () => {
+      showAll = !showAll;
+      showMore.setAttribute('aria-expanded', String(showAll));
+      showMore.textContent = showAll ? 'Show Fewer Certifications' : 'View All Certifications';
+      updateCards();
     });
   }
+
+  updateCards();
 })();

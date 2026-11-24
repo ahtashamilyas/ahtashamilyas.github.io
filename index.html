@@ -123,7 +123,7 @@
       <div class="about-grid">
         <div class="about-text reveal">
           <p>I'm a researcher and engineer who transitioned from full-stack development to the scientific frontier of <strong>AI, Machine Learning & Robotics</strong>. After graduating with First Class Honors in Computer Science, I relocated to <strong>Bremen, Germany</strong> to pursue an MSc at the University of Bremen.</p>
-          <p>My current research focuses on <strong>Advanced Machine Learning</strong>, <strong>Perception(6D Pose Estimation)</strong>, and <strong>Cognitive Robotics</strong> through the ACRAMbly master project. I believe the most important breakthroughs live at the intersection of software, hardware, and intelligence.</p>
+          <p>My current research focuses on <strong>Advanced Machine Learning</strong>, <strong>Perception (6D Pose Estimation)</strong>, and <strong>Cognitive Robotics</strong> through the ACRAMbly master project. I believe the most important breakthroughs live at the intersection of software, hardware, and intelligence.</p>
           <p>Previously I delivered 15+ production projects across Europe and the Middle East as a freelance developer, and held engineering roles at <strong>CandidateSide</strong> and <strong>Prime Missions (UK)</strong>.</p>
         </div>
 
@@ -263,85 +263,89 @@
         <h2 class="section-title">Featured Projects</h2>
       </div>
 
-      <div class="projects-list">
-
-        <div class="proj-row reveal" data-delay="0">
-          <div class="proj-index">01</div>
-          <div class="proj-body">
-            <h3>Machine Learning Research – University Papers</h3>
-            <p>Research project analyzing university research papers using ML pipelines. NLP-based classification and topic extraction on academic datasets.</p>
-            <div class="proj-code">
-              <span class="c-kw">def</span> <span class="c-fn">analyze_papers</span>(papers):
-              <br>&nbsp;&nbsp;results = ml_model.predict(papers)
-              <br>&nbsp;&nbsp;<span class="c-kw">return</span> process_results(results)
-            </div>
-            <div class="proj-tags"><span>Python</span><span>TensorFlow</span><span>NLP</span></div>
+      <div class="projects-grid">
+        <article class="project-card reveal" data-delay="0">
+          <div class="project-media">
+            <video autoplay loop muted playsinline preload="none" poster="public/assets/projects/research-demo-poster.svg" aria-label="ACRAMbly 6DoF object perception demo">
+              <source data-src="public/assets/projects/acrambly.webm" type="video/webm">
+              <source data-src="public/assets/projects/acrambly.mp4" type="video/mp4">
+              <img src="public/assets/projects/research-demo-poster.svg" alt="Placeholder for the ACRAMbly perception demo">
+            </video>
+            <span class="project-media-label">Research demo</span>
           </div>
-          <a href="#" class="proj-arrow">→</a>
-        </div>
-
-        <div class="proj-row reveal" data-delay="80">
-          <div class="proj-index">02</div>
-          <div class="proj-body">
-            <h3>Auto-listening & AI Job Reviewing – CandidateSide</h3>
-            <p>Automated job-board scraper with GPT-powered review engine. Live at <a href="https://candidateside.com" target="_blank">candidateside.com</a>. Processes thousands of postings daily with 99.9% data accuracy.</p>
-            <div class="proj-code">
-              <span class="c-kw">def</span> <span class="c-fn">fetch_review_jobs</span>(board):
-              <br>&nbsp;&nbsp;jobs = auto_listen(board)
-              <br>&nbsp;&nbsp;review = gpt_model.review(jobs)
-              <br>&nbsp;&nbsp;<span class="c-kw">return</span> process_reviews(review)
+          <div class="project-content">
+            <div class="project-meta"><span class="project-category">Robotics · 6DoF Perception</span><span class="project-number">01</span></div>
+            <h3>ACRAMbly – 6DoF Object Perception Pipeline</h3>
+            <p>RGB-based object detection, instance segmentation, and 6D pose estimation for a cognitive robotics assembly workflow at the University of Bremen’s AICOR institute.</p>
+            <div class="project-tags"><span>PyTorch</span><span>Computer Vision</span><span>6D Pose</span><span>ROS</span></div>
+            <div class="project-actions">
+              <a class="project-action primary" href="https://github.com/ahtashamilyas/Perception" target="_blank" rel="noopener noreferrer">GitHub Repo <span aria-hidden="true">↗</span></a>
+              <a class="project-action" href="https://aicor.uni-bremen.de/" target="_blank" rel="noopener noreferrer">AICOR <span aria-hidden="true">↗</span></a>
             </div>
-            <div class="proj-tags"><span>Python</span><span>Selenium</span><span>HuggingFace</span><span>LLM</span></div>
           </div>
-          <a href="https://candidateside.com" target="_blank" class="proj-arrow">→</a>
-        </div>
+        </article>
 
-        <div class="proj-row reveal" data-delay="160">
-          <div class="proj-index">03</div>
-          <div class="proj-body">
-            <h3>Full-Stack RESTful Web Application</h3>
-            <p>Responsive web application with a Node.js backend, RESTful API design, and cloud-native deployment on AWS using Docker and CI/CD pipelines.</p>
-            <div class="proj-code">
-              <span class="c-kw">const</span> getData = <span class="c-kw">async</span> () => {
-              <br>&nbsp;&nbsp;<span class="c-kw">const</span> res = <span class="c-kw">await</span> fetch(<span class="c-str">'/api/data'</span>)
-              <br>&nbsp;&nbsp;<span class="c-kw">return</span> res.json()
-              <br>}
+        <article class="project-card reveal" data-delay="80">
+          <div class="project-media">
+            <video autoplay loop muted playsinline preload="none" poster="public/assets/projects/research-demo-poster.svg" aria-label="SplatFuse3D geometry-verified segmentation demo">
+              <source data-src="public/assets/projects/splatfuse3d.webm" type="video/webm">
+              <source data-src="public/assets/projects/splatfuse3d.mp4" type="video/mp4">
+              <img src="public/assets/projects/research-demo-poster.svg" alt="Placeholder for the SplatFuse3D demo">
+            </video>
+            <span class="project-media-label">3D vision demo</span>
+          </div>
+          <div class="project-content">
+            <div class="project-meta"><span class="project-category">3D Vision · Gaussian Splatting</span><span class="project-number">02</span></div>
+            <h3>SplatFuse3D – Geometry-Verified 3D Gaussian Segmentation</h3>
+            <p>Geometry-aware object and part extraction for 3D Gaussian scenes, pairing language-driven segmentation with geometric verification for more reliable results.</p>
+            <div class="project-tags"><span>3D Gaussian Splatting</span><span>Segmentation</span><span>Geometry</span><span>Python</span></div>
+            <div class="project-actions">
+              <a class="project-action primary" href="https://github.com/ahtashamilyas/splatfuse3d" target="_blank" rel="noopener noreferrer">GitHub Repo <span aria-hidden="true">↗</span></a>
+              <a class="project-action" href="splatfuse3d/">Project Page <span aria-hidden="true">↗</span></a>
             </div>
-            <div class="proj-tags"><span>React</span><span>Node.js</span><span>MongoDB</span><span>AWS</span></div>
           </div>
-          <a href="#" class="proj-arrow">→</a>
-        </div>
+        </article>
 
-        <div class="proj-row reveal" data-delay="240">
-          <div class="proj-index">04</div>
-          <div class="proj-body">
-            <h3>ACRAMbly – Cognitive Robotics Master Project</h3>
-            <p>Master project at University of Bremen. Building autonomous and intelligent robotic system combining perception, planning and action in the Autonomous & Intelligent Systems track.</p>
-            <div class="proj-code">
-              <span class="c-kw">class</span> <span class="c-fn">ACRAMbly</span>(RobotAgent):
-              <br>&nbsp;&nbsp;<span class="c-kw">def</span> <span class="c-fn">perceive</span>(self, env):
-              <br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-kw">return</span> self.model.infer(env)
+        <article class="project-card reveal" data-delay="160">
+          <div class="project-media">
+            <video autoplay loop muted playsinline preload="none" poster="public/assets/projects/research-demo-poster.svg" aria-label="VLM action acquisition pipeline demo">
+              <source data-src="public/assets/projects/vlm-action-acquisition.webm" type="video/webm">
+              <source data-src="public/assets/projects/vlm-action-acquisition.mp4" type="video/mp4">
+              <img src="public/assets/projects/research-demo-poster.svg" alt="Placeholder for the VLM action acquisition demo">
+            </video>
+            <span class="project-media-label">RGB-D · VLM pipeline</span>
+          </div>
+          <div class="project-content">
+            <div class="project-meta"><span class="project-category">Vision-Language Models · Robotics</span><span class="project-number">03</span></div>
+            <h3>VLM-Action-Acquisition – 4-Stage RGB-D Pipeline</h3>
+            <p>A four-stage inference pipeline combining RGB-D preprocessing, motion-aware keyframe extraction, structured VLM inference, and action-knowledge-graph grounding.</p>
+            <div class="project-tags"><span>RGB-D</span><span>VLM</span><span>Keyframes</span><span>Knowledge Graphs</span></div>
+            <div class="project-actions">
+              <a class="project-action primary" href="https://github.com/ahtashamilyas/VLM-action-acquisition" target="_blank" rel="noopener noreferrer">GitHub Repo <span aria-hidden="true">↗</span></a>
             </div>
-            <div class="proj-tags"><span>Python</span><span>ROS</span><span>RL</span><span>Computer Vision</span></div>
           </div>
-          <a href="#" class="proj-arrow">→</a>
-        </div>
+        </article>
 
-        <div class="proj-row reveal" data-delay="320">
-          <div class="proj-index">05</div>
-          <div class="proj-body">
-            <h3>Deep Learning – Image Segmentation Pipeline</h3>
-            <p>PyTorch-based image segmentation pipeline using U-Net architecture for pixel-level classification. Certified by Coursera (6VNJ693QEB4Z).</p>
-            <div class="proj-code">
-              model = <span class="c-fn">UNet</span>(in_channels=3, classes=10)
-              <br>pred = model(image_tensor)
-              <br>mask = pred.argmax(dim=1)
+        <article class="project-card reveal" data-delay="240">
+          <div class="project-media">
+            <video autoplay loop muted playsinline preload="none" poster="public/assets/projects/research-demo-poster.svg" aria-label="CandidateSide job-listening and review engine demo">
+              <source data-src="public/assets/projects/candidateside.webm" type="video/webm">
+              <source data-src="public/assets/projects/candidateside.mp4" type="video/mp4">
+              <img src="public/assets/projects/research-demo-poster.svg" alt="Placeholder for the CandidateSide demo">
+            </video>
+            <span class="project-media-label">Product demo</span>
+          </div>
+          <div class="project-content">
+            <div class="project-meta"><span class="project-category">Automation · Applied AI</span><span class="project-number">04</span></div>
+            <h3>CandidateSide – Automated Job-Board Listener &amp; GPT Review Engine</h3>
+            <p>Automated job-board monitoring and structured AI-assisted review, built to turn high-volume listings into useful, searchable candidate insights.</p>
+            <div class="project-tags"><span>Python</span><span>Selenium</span><span>LLMs</span><span>Data Pipelines</span></div>
+            <div class="project-actions">
+              <a class="project-action primary" href="https://github.com/ahtashamilyas/Job_Review" target="_blank" rel="noopener noreferrer">GitHub Repo <span aria-hidden="true">↗</span></a>
+              <a class="project-action" href="https://candidateside.com" target="_blank" rel="noopener noreferrer">Live Demo <span aria-hidden="true">↗</span></a>
             </div>
-            <div class="proj-tags"><span>PyTorch</span><span>U-Net</span><span>Segmentation</span></div>
           </div>
-          <a href="https://coursera.org/verify/6VNJ693QEB4Z" target="_blank" class="proj-arrow">→</a>
-        </div>
-
+        </article>
       </div>
     </div>
   </section>
@@ -423,6 +427,8 @@
           </div>
         </div>
 
+        <div class="experience-collapsible" id="moreExperience" aria-hidden="true" inert>
+          <div class="experience-collapsible-inner">
         <div class="tl-item reveal" data-delay="200">
           <div class="tl-marker">
             <div class="tl-dot"></div>
@@ -486,8 +492,11 @@
             </div>
           </div>
         </div>
+          </div>
+        </div>
 
       </div>
+      <button class="show-more-btn experience-toggle" id="experienceToggle" type="button" aria-expanded="false" aria-controls="moreExperience">Show More Experience (+3)</button>
     </div>
   </section>
 
@@ -499,129 +508,120 @@
         <h2 class="section-title">Education &amp; Certifications</h2>
       </div>
 
-      <!-- Tab Switcher -->
-      <div class="edu-tabs reveal">
-        <button class="edu-tab active" data-tab="formal">Formal Education</button>
-        <button class="edu-tab" data-tab="certs">Certifications &amp; Courses</button>
-      </div>
-
-      <!-- Formal Education -->
-      <div class="edu-panel active" id="tab-formal">
-        <div class="edu-card reveal">
-          <div class="edu-left">
-            <div class="edu-year">2024<br><span>– Present</span></div>
-          </div>
-          <div class="edu-right">
-            <span class="edu-badge">Current</span>
-            <h3>Master of Science – Artificial Intelligence and Intelligent Systems</h3>
-            <p class="edu-inst">University of Bremen · Bremen, Germany</p>
-            <div class="edu-desc">
-              <p><strong>Semester 1:</strong> F-AMAI (Advanced Methods of AI), F-AML (Advanced Machine Learning), F-IIS (Integrated Intelligent Systems), F-ATE (AI Algorithms: Theory & Engineering)</p>
-              <p><strong>Semester 2:</strong> Specialisation in Machine Learning & Cognitive Robotics — Master Project: <em>ACRAMbly</em>, Autonomous & Intelligent Systems track.</p>
+      <div class="education-bento">
+        <div class="formal-education">
+          <div class="education-tier-heading">
+            <div>
+              <span class="section-eyebrow">01 · Academic background</span>
+              <h3>Formal Education</h3>
             </div>
           </div>
+          <div class="education-grid">
+            <article class="edu-card reveal">
+              <div class="edu-card-top"><span class="edu-badge">2024 – Present</span><span class="edu-badge">Current</span></div>
+              <h4>M.Sc. Artificial Intelligence &amp; Intelligent Systems</h4>
+              <p class="edu-inst">University of Bremen · Bremen, Germany</p>
+              <p class="edu-copy">Specialisation in Machine Learning and Cognitive Robotics, with a master project on autonomous perception and action.</p>
+              <div class="edu-metadata">
+                <span>Specialisation · ML &amp; Cognitive Robotics</span>
+                <span>Master project · ACRAMbly</span>
+              </div>
+            </article>
+            <article class="edu-card reveal" data-delay="100">
+              <div class="edu-card-top"><span class="edu-badge">2019 – 2023</span><span class="edu-badge honor">First Class Honours</span></div>
+              <h4>B.Sc. Computer Science</h4>
+              <p class="edu-inst">Mirpur University of Science &amp; Technology (MUST) · Pakistan</p>
+              <p class="edu-copy">Graduated with First Class Honours and Dean’s List recognition. Capstone research focused on university research papers.</p>
+              <div class="edu-metadata">
+                <span>Rank · 5th / 86</span>
+                <span>Marks · A Grade</span>
+              </div>
+            </article>
+          </div>
         </div>
 
-        <div class="edu-card reveal" data-delay="100">
-          <div class="edu-left">
-            <div class="edu-year">2019<br><span>– 2023</span></div>
-          </div>
-          <div class="edu-right">
-            <span class="edu-badge honor">First Class Honours</span>
-            <h3>Bachelor of Science – Computer Science</h3>
-            <p class="edu-inst">Mirpur University of Science & Technology (MUST) · Pakistan</p>
-            <div class="edu-desc">
-              <p></strong> &nbsp;|&nbsp; Marks: <strong>A Grade</strong> &nbsp;|&nbsp; Rank: <strong>5th / 86</strong></p>
-              <p>Earned Dean's List recognition for academic excellence. Capstone research project on university research papers (GitHub | Thesis). Completed with First Class Honours.</p>
+        <div class="verified-certifications">
+          <div class="education-tier-heading certifications-heading">
+            <div>
+              <span class="section-eyebrow">02 · Professional development</span>
+              <h3>Verified Certifications</h3>
             </div>
           </div>
+          <div class="cert-filters" role="group" aria-label="Filter certifications">
+            <button type="button" class="cert-filter active" data-cert-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="cert-filter" data-cert-filter="ai" aria-pressed="false">AI &amp; Deep Learning</button>
+            <button type="button" class="cert-filter" data-cert-filter="data" aria-pressed="false">Data Science</button>
+            <button type="button" class="cert-filter" data-cert-filter="cloud" aria-pressed="false">Cloud &amp; Dev</button>
+          </div>
+          <div class="certs-grid" id="certsGrid">
+            <a class="cert-card" data-category="ai" href="https://www.datacamp.com/certificate/AEDS0010489229515" target="_blank" rel="noopener noreferrer">
+              <span class="cert-issuer">DataCamp · Apr 2025</span>
+              <h4>AI Engineer for Data Scientists Associate</h4>
+              <span class="cert-id">Credential · AEDS0010489229515</span>
+            </a>
+            <a class="cert-card" data-category="data" href="https://www.datacamp.com/certificate/PDA0014426478528" target="_blank" rel="noopener noreferrer">
+              <span class="cert-issuer">DataCamp · Mar 2025</span>
+              <h4>Python Data Associate</h4>
+              <span class="cert-id">Credential · PDA0014426478528</span>
+            </a>
+            <a class="cert-card" data-category="ai" href="https://coursera.org/verify/6VNJ693QEB4Z" target="_blank" rel="noopener noreferrer">
+              <span class="cert-issuer">Coursera · Jun 2024</span>
+              <h4>Deep Learning with PyTorch: Image Segmentation</h4>
+              <span class="cert-id">Credential · 6VNJ693QEB4Z</span>
+            </a>
+            <a class="cert-card" data-category="data" href="https://coursera.org/verify/MLKLDTPN8RZ9" target="_blank" rel="noopener noreferrer">
+              <span class="cert-issuer">University of Michigan · May 2024</span>
+              <h4>Programming for Everybody (Python)</h4>
+              <span class="cert-id">Credential · MLKLDTPN8RZ9</span>
+            </a>
+            <a class="cert-card" data-category="ai" href="https://www.coursera.org/account/accomplishments/verify/ZLDVN62CV5DD" target="_blank" rel="noopener noreferrer">
+              <span class="cert-issuer">AWS / DeepLearning.AI · Dec 2023</span>
+              <h4>Generative AI with Large Language Models</h4>
+              <span class="cert-id">Credential · ZLDVN62CV5DD</span>
+            </a>
+            <a class="cert-card" data-category="ai" href="https://www.coursera.org/account/accomplishments/specialization/N5P4CZQ9XJUD" target="_blank" rel="noopener noreferrer">
+              <span class="cert-issuer">DeepLearning.AI · Feb 2023</span>
+              <h4>Specialisation in Machine Learning</h4>
+              <span class="cert-id">Credential · N5P4CZQ9XJUD</span>
+            </a>
+            <a class="cert-card" data-category="cloud" href="https://www.coursera.org/account/accomplishments/verify/B2AR59L7YKTA" target="_blank" rel="noopener noreferrer" hidden>
+              <span class="cert-issuer">UC Irvine · Dec 2023</span>
+              <h4>Raspberry Pi Platform &amp; Python Programming</h4>
+              <span class="cert-id">Credential · B2AR59L7YKTA</span>
+            </a>
+            <a class="cert-card" data-category="ai" href="https://www.coursera.org/account/accomplishments/verify/2QEN9V64F2GQ" target="_blank" rel="noopener noreferrer" hidden>
+              <span class="cert-issuer">DeepLearning.AI · Jul 2023</span>
+              <h4>Advanced Learning Algorithms</h4>
+              <span class="cert-id">Credential · 2QEN9V64F2GQ</span>
+            </a>
+            <a class="cert-card" data-category="ai" href="https://www.coursera.org/account/accomplishments/certificate/UTJ7E8KCB55B" target="_blank" rel="noopener noreferrer" hidden>
+              <span class="cert-issuer">DeepLearning.AI · May 2023</span>
+              <h4>Supervised ML: Regression &amp; Classification</h4>
+              <span class="cert-id">Credential · UTJ7E8KCB55B</span>
+            </a>
+            <a class="cert-card" data-category="cloud" href="https://www.coursera.org/account/accomplishments/certificate/DCHPJULT5G9C" target="_blank" rel="noopener noreferrer" hidden>
+              <span class="cert-issuer">Microsoft · Mar 2023</span>
+              <h4>Microsoft Azure for Data Engineering</h4>
+              <span class="cert-id">Credential · DCHPJULT5G9C</span>
+            </a>
+            <a class="cert-card" data-category="data" href="https://www.coursera.org/account/accomplishments/certificate/PAG6QNHAK38P" target="_blank" rel="noopener noreferrer" hidden>
+              <span class="cert-issuer">IBM · Mar 2023</span>
+              <h4>Python for Data Science, AI &amp; Development</h4>
+              <span class="cert-id">Credential · PAG6QNHAK38P</span>
+            </a>
+            <a class="cert-card" data-category="data" href="https://www.coursera.org/account/accomplishments/verify/2QEN9V64F2GQ" target="_blank" rel="noopener noreferrer" hidden>
+              <span class="cert-issuer">IBM · Mar 2023</span>
+              <h4>What is Data Science?</h4>
+              <span class="cert-id">Credential · 2QEN9V64F2GQ</span>
+            </a>
+            <a class="cert-card" data-category="data" href="https://www.datacamp.com/certificate/DSA0016892666406" target="_blank" rel="noopener noreferrer" hidden>
+              <span class="cert-issuer">DataCamp · Mar 2025</span>
+              <h4>Data Scientist Associate</h4>
+              <span class="cert-id">Credential · DSA0016892666406</span>
+            </a>
+          </div>
+          <button class="show-more-btn" id="showMoreCerts" type="button" aria-expanded="false" aria-controls="certsGrid">View All Certifications</button>
         </div>
-      </div>
-
-      <!-- Certifications -->
-      <div class="edu-panel" id="tab-certs">
-        <div class="certs-grid" id="certsGrid">
-
-          <a class="cert-card reveal" href="https://www.datacamp.com/certificate/AEDS0010489229515" target="_blank">
-            <span class="cert-issuer">DataCamp · Apr 2025</span>
-            <h4>AI Engineer for Data Scientists Associate</h4>
-            <span class="cert-id">AEDS0010489229515</span>
-          </a>
-
-          <a class="cert-card reveal" data-delay="60" href="https://www.datacamp.com/certificate/PDA0014426478528" target="_blank">
-            <span class="cert-issuer">DataCamp · Mar 2025</span>
-            <h4>Python Data Associate</h4>
-            <span class="cert-id">PDA0014426478528</span>
-          </a>
-
-          <a class="cert-card reveal" data-delay="120" href="https://coursera.org/verify/6VNJ693QEB4Z" target="_blank">
-            <span class="cert-issuer">Coursera · Jun 2024</span>
-            <h4>Deep Learning with PyTorch: Image Segmentation</h4>
-            <span class="cert-id">6VNJ693QEB4Z</span>
-          </a>
-
-          <a class="cert-card reveal" data-delay="180" href="https://coursera.org/verify/MLKLDTPN8RZ9" target="_blank">
-            <span class="cert-issuer">University of Michigan · May 2024</span>
-            <h4>Programming for Everybody (Python)</h4>
-            <span class="cert-id">MLKLDTPN8RZ9</span>
-          </a>
-
-          <a class="cert-card reveal" data-delay="240" href="https://www.coursera.org/account/accomplishments/verify/ZLDVN62CV5DD" target="_blank">
-            <span class="cert-issuer">AWS / DeepLearning.AI · Dec 2023</span>
-            <h4>Generative AI with Large Language Models</h4>
-            <span class="cert-id">ZLDVN62CV5DD</span>
-          </a>
-
-          <a class="cert-card reveal" data-delay="300" href="https://www.coursera.org/account/accomplishments/specialization/N5P4CZQ9XJUD" target="_blank">
-            <span class="cert-issuer">DeepLearning.AI · Feb 2023</span>
-            <h4>Specialisation in Machine Learning</h4>
-            <span class="cert-id">N5P4CZQ9XJUD</span>
-          </a>
-          
-          <a class="cert-card reveal cert-hidden" href="https://www.coursera.org/account/accomplishments/verify/B2AR59L7YKTA" target="_blank">
-            <span class="cert-issuer">UC Irvine · Dec 2023</span>
-            <h4>Raspberry Pi Platform & Python Programming</h4>
-            <span class="cert-id">B2AR59L7YKTA</span>
-          </a>
-
-          <a class="cert-card reveal cert-hidden" href="https://www.coursera.org/account/accomplishments/verify/2QEN9V64F2GQ" target="_blank">
-            <span class="cert-issuer">DeepLearning.AI · Jul 2023</span>
-            <h4>Advanced Learning Algorithms</h4>
-            <span class="cert-id">2QEN9V64F2GQ</span>
-          </a>
-
-          <a class="cert-card reveal cert-hidden" href="https://www.coursera.org/account/accomplishments/certificate/UTJ7E8KCB55B" target="_blank">
-            <span class="cert-issuer">DeepLearning.AI · May 2023</span>
-            <h4>Supervised ML: Regression & Classification</h4>
-            <span class="cert-id">UTJ7E8KCB55B</span>
-          </a>
-
-          <a class="cert-card reveal cert-hidden" href="https://www.coursera.org/account/accomplishments/certificate/DCHPJULT5G9C" target="_blank">
-            <span class="cert-issuer">Microsoft · Mar 2023</span>
-            <h4>Microsoft Azure for Data Engineering</h4>
-            <span class="cert-id">DCHPJULT5G9C</span>
-          </a>
-
-          <a class="cert-card reveal cert-hidden" href="https://www.coursera.org/account/accomplishments/certificate/PAG6QNHAK38P" target="_blank">
-            <span class="cert-issuer">IBM · Mar 2023</span>
-            <h4>Python for Data Science, AI & Development</h4>
-            <span class="cert-id">PAG6QNHAK38P</span>
-          </a>
-
-          <a class="cert-card reveal cert-hidden" href="https://www.coursera.org/account/accomplishments/verify/2QEN9V64F2GQ" target="_blank">
-            <span class="cert-issuer">IBM · Mar 2023</span>
-            <h4>What is Data Science?</h4>
-            <span class="cert-id">2QEN9V64F2GQ</span>
-          </a>
-
-          <a class="cert-card reveal cert-hidden" href="https://www.datacamp.com/certificate/DSA0016892666406" target="_blank">
-            <span class="cert-issuer">DataCamp · Mar 2025</span>
-            <h4>Data Scientist Associate</h4>
-            <span class="cert-id">DSA0016892666406</span>
-          </a>
-
-        </div>
-        <button class="show-more-btn" id="showMoreCerts">Show More Certificates <span>+</span></button>
       </div>
 
     </div>
@@ -744,7 +744,7 @@
         <a href="#contact">Contact</a>
       </nav>
       <div class="footer-copy">
-        <p>© 2024 Ahtasham Ilyas. All rights reserved.</p>
+        <p>© 2026 Ahtasham Ilyas. All rights reserved.</p>
         <a href="#home" class="back-top">↑ Top</a>
       </div>
     </div>
@@ -760,6 +760,7 @@
   <script src="src/js/reveal.js"></script>
   <script src="src/js/skills.js"></script>
   <script src="src/js/tabs.js"></script>
+  <script src="src/js/experience.js"></script>
   <script src="src/js/modal.js"></script>
   <script src="src/js/contact.js"></script>
   <script src="src/js/counters.js"></script>
